@@ -1,0 +1,282 @@
+﻿@model IEnumerable<Proyecto_SistemaIntranet.Models.usp_user_acceso_Result>
+@using  Proyecto_SistemaIntranet.Models
+
+@{ 
+    Usuario obj = (Usuario)Session["Usuario"];
+    string nombrerol = Session["Rol"].ToString();
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="~/assets/css/default/app.min.css" rel="stylesheet">
+    <!-- end Estilo Principal -->
+    <!-- begin Estilo de Página Principal -->
+    <!-- Plugin: estilo para notificaciones -->
+    <!-- end Estilo de Página Principal -->
+</head>
+<body>
+
+
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade show"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+
+
+        <!-- begin #header -->
+        <div id="header" class="header navbar-inverse">
+            <!-- begin navbar-header -->
+            <div class="navbar-header">
+                <a href="index-1.html" class="navbar-brand">
+                    <span class="navbar-logo"></span> <b>Colegio Privado Sigma</b>
+                </a>
+                <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- end navbar-header -->
+            <!-- begin header-nav -->
+            <ul class="navbar-nav navbar-right">
+                <li class="navbar-form">
+                    <form action="" method="POST" name="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Enter keyword">
+                            <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+                        </div>
+                    </form>
+                </li>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle f-s-14">
+                        <i class="fa fa-bell"></i>
+                        <span class="label">5</span>
+                    </a>
+                    <div class="dropdown-menu media-list dropdown-menu-right">
+                        <div class="dropdown-header">NOTIFICATIONS (5)</div>
+                        <a href="javascript:;" class="dropdown-item media">
+                            <div class="media-left">
+                                <i class="fa fa-bug media-object bg-silver-darker"></i>
+                            </div>
+                            <div class="media-body">
+                                <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
+                                <div class="text-muted f-s-10">3 minutes ago</div>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item media">
+                            <div class="media-left">
+                                <img src="..\assets\img\user\user-1.jpeg" class="media-object" alt="">
+                                <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
+                            </div>
+                            <div class="media-body">
+                                <h6 class="media-heading">John Smith</h6>
+                                <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
+                                <div class="text-muted f-s-10">25 minutes ago</div>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item media">
+                            <div class="media-left">
+                                <img src="..\assets\img\user\user-2.jpeg" class="media-object" alt="">
+                                <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
+                            </div>
+                            <div class="media-body">
+                                <h6 class="media-heading">Olivia</h6>
+                                <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
+                                <div class="text-muted f-s-10">35 minutes ago</div>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item media">
+                            <div class="media-left">
+                                <i class="fa fa-plus media-object bg-silver-darker"></i>
+                            </div>
+                            <div class="media-body">
+                                <h6 class="media-heading"> New User Registered</h6>
+                                <div class="text-muted f-s-10">1 hour ago</div>
+                            </div>
+                        </a>
+                        <a href="javascript:;" class="dropdown-item media">
+                            <div class="media-left">
+                                <i class="fa fa-envelope media-object bg-silver-darker"></i>
+                                <i class="fab fa-google text-warning media-object-icon f-s-14"></i>
+                            </div>
+                            <div class="media-body">
+                                <h6 class="media-heading"> New Email From John</h6>
+                                <div class="text-muted f-s-10">2 hour ago</div>
+                            </div>
+                        </a>
+                        <div class="dropdown-footer text-center">
+                            <a href="javascript:;">View more</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown navbar-user">
+                    @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="@ViewBag.usuario.rutaImagen" alt="">
+                        <span class="d-none d-md-inline">
+                            @ViewBag.usuario.nombreUsuario @ViewBag.usuario.apellidoUsuario
+                        </span> <b class="caret"></b>
+                    </a>*@
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="@obj.rutaImagen" alt="">
+                        <span class="d-none d-md-inline">
+                            @obj.nombreUsuario @obj.apellidoUsuario
+                        </span> <b class="caret"></b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="javascript:;" class="dropdown-item">Edit Profile</a>
+                        <a href="javascript:;" class="dropdown-item"><span class="badge badge-danger pull-right">2</span> Inbox</a>
+                        <a href="javascript:;" class="dropdown-item">Calendar</a>
+                        <a href="javascript:;" class="dropdown-item">Setting</a>
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Cerrar Sesión", "Logout", "Login", null, new { @class = "dropdown-item" })
+                        @*<a href="javascript:;" class="dropdown-item">Log Out</a>*@
+                    </div>
+                </li>
+            </ul>
+            <!-- end header-nav -->
+        </div>
+        <!-- end #header -->
+        <!-- begin #sidebar -->
+        <div id="sidebar" class="sidebar">
+            <!-- begin sidebar scrollbar -->
+            <div data-scrollbar="true" data-height="100%">
+                <!-- begin sidebar user -->
+                <ul class="nav">
+                    <li class="nav-profile">
+                        <a href="javascript:;" data-toggle="nav-profile">
+                            <div class="cover with-shadow"></div>
+                            <div class="image">
+                                <img src="@obj.rutaImagen" alt="">
+                            </div>
+                            <div class="info">
+                                <b class="caret pull-right"></b>
+                                 @obj.nombreUsuario @obj.apellidoUsuario
+                                <small>
+                                    @nombrerol
+
+                                </small>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <ul class="nav nav-profile">
+                            @if (Session["Menu"] != null)
+                            {
+                                foreach (var lista in Model)
+                                {
+                                    if (lista.idacceso == 1)
+                                    {
+                                        <li>
+                                            <a href="javascript:;">
+                                                <!--  <b class="caret"></b>-->
+                                                <i class="@lista.iconoAcceso"></i>
+                                                <span>@lista.nombreAcceso</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    if (lista.idacceso == 2)
+                                    {
+                                        <li>
+                                            <a href="javascript:;">
+                                                <!--  <b class="caret"></b>-->
+                                                <i class="@lista.iconoAcceso"></i>
+                                                <span>@lista.nombreAcceso</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    if (lista.idacceso == 3)
+                                    {
+                                        <li>
+                                            <a href="javascript:;">
+                                                <!--  <b class="caret"></b>-->
+                                                <i class="@lista.iconoAcceso"></i>
+                                                <span>@lista.nombreAcceso</span>
+                                            </a>
+                                        </li>
+                                    }
+
+                                }
+                            }
+                            
+                            @*<li><a href="javascript:;"><i class="fa fa-cog"></i> Settings</a></li>
+        <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Send Feedback</a></li>
+        <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>*@
+                        </ul>
+                    </li>
+                </ul>
+                <!-- end sidebar user -->
+                <!-- begin sidebar nav -->
+                <ul class="nav">
+                    <li class="nav-header">Opciones</li>
+                    <li class="active">
+                        <a href="home">
+                            <i class="fa fa-home fa-fw "></i>
+                            <span class="f-s-13 f-w-700">Inicio</span>
+                        </a>
+                    </li>
+                    @if (Session["Menu"] != null)
+                    {
+                        foreach (var lista in Model)
+                        {
+                            if (lista.idacceso != 1 && lista.idacceso != 2 && lista.idacceso != 3)
+                            {
+                                <li>
+                                    <a href="javascript:;">
+                                        <!--  <b class="caret"></b>-->
+                                        <i class="@lista.iconoAcceso"></i>
+                                        <span>@lista.nombreAcceso</span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    }
+
+
+                    <!--<li class="active">
+                    <a href="javascript:;">-->
+                    <!--  <b class="caret"></b>-->
+                    <!--<i class="fa fa-th-large"></i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="bootstrap_4.html">
+                            <div class="icon-img">
+                                <i class="fa fa-atlas"></i>-->
+                    <!--<img src="..\assets\img\logo\logo-bs4.png" alt="">-->
+                    <!--</div>
+                            <span>Bootstrap 4 <span class="label label-theme">NEW</span></span>
+                        </a>
+                    </li>-->
+
+                </ul>
+                <!-- end sidebar nav -->
+            </div>
+        </div>
+
+
+
+        @RenderBody()
+
+
+
+        <!-- begin scroll to top btn : Boton que hace scroll hacia arriba-->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+        <!-- end scroll to top btn -->
+    </div>
+    <!-- end page container -->
+    <!-- begin Estilo Principal -->
+    <script src="~/assets/js/app.min.js"></script>
+    <script src="~/assets/js/theme/default.min.js"></script>
+    <!-- end Estilo Principal -->
+    <!-- begin Estilo de Pagina Principal -->
+    <script src="~/assets/plugins/gritter/js/jquery.gritter.js"></script>
+    <script src="~/assets/js/demo/dashboard.js"></script>
+    <!-- end Estilo de Pagina Principal -->
+</body>
+</html>

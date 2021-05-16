@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SistemaIntranetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Acceso">
+          <Key>
+            <PropertyRef Name="idacceso" />
+          </Key>
+          <Property Name="idacceso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreAcceso" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rutaAcceso" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="iconoAcceso" Type="varchar" MaxLength="30" />
+          <Property Name="estadoAcceso" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="idrol" />
+          </Key>
+          <Property Name="idrol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol_has_Acceso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idrol" Type="int" Nullable="false" />
+          <Property Name="idacceso" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idusuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dniUsuario" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="fechaNacUsuario" Type="date" Nullable="false" />
+          <Property Name="direccionUsuario" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="telefonoUsuario" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="idrol" Type="int" Nullable="false" />
+          <Property Name="rutaImagen" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_Rol_has_Acceso_Acceso">
+          <End Role="Acceso" Type="Self.Acceso" Multiplicity="1" />
+          <End Role="Rol_has_Acceso" Type="Self.Rol_has_Acceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acceso">
+              <PropertyRef Name="idacceso" />
+            </Principal>
+            <Dependent Role="Rol_has_Acceso">
+              <PropertyRef Name="idacceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol_has_Acceso_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Rol_has_Acceso" Type="Self.Rol_has_Acceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="idrol" />
+            </Principal>
+            <Dependent Role="Rol_has_Acceso">
+              <PropertyRef Name="idrol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="idrol" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idrol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="usp_user_acceso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idrol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Usuario_Acceso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idrol" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="SistemaIntranetModelStoreContainer">
+          <EntitySet Name="Acceso" EntityType="Self.Acceso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol_has_Acceso" EntityType="Self.Rol_has_Acceso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Rol_has_Acceso_Acceso" Association="Self.FK_Rol_has_Acceso_Acceso">
+            <End Role="Acceso" EntitySet="Acceso" />
+            <End Role="Rol_has_Acceso" EntitySet="Rol_has_Acceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol_has_Acceso_Rol" Association="Self.FK_Rol_has_Acceso_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Rol_has_Acceso" EntitySet="Rol_has_Acceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SistemaIntranetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Acceso">
+          <Key>
+            <PropertyRef Name="idacceso" />
+          </Key>
+          <Property Name="idacceso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreAcceso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rutaAcceso" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estadoAcceso" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rol_has_Acceso" Relationship="Self.FK_Rol_has_Acceso_Acceso" FromRole="Acceso" ToRole="Rol_has_Acceso" />
+          <Property Name="iconoAcceso" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="idrol" />
+          </Key>
+          <Property Name="idrol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Rol_has_Acceso" Relationship="Self.FK_Rol_has_Acceso_Rol" FromRole="Rol" ToRole="Rol_has_Acceso" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Rol_has_Acceso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idrol" Type="Int32" Nullable="false" />
+          <Property Name="idacceso" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Acceso" Relationship="Self.FK_Rol_has_Acceso_Acceso" FromRole="Rol_has_Acceso" ToRole="Acceso" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Rol_has_Acceso_Rol" FromRole="Rol_has_Acceso" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idusuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dniUsuario" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaNacUsuario" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="direccionUsuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefonoUsuario" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idrol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
+          <Property Name="rutaImagen" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Rol_has_Acceso_Acceso">
+          <End Role="Acceso" Type="Self.Acceso" Multiplicity="1" />
+          <End Role="Rol_has_Acceso" Type="Self.Rol_has_Acceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acceso">
+              <PropertyRef Name="idacceso" />
+            </Principal>
+            <Dependent Role="Rol_has_Acceso">
+              <PropertyRef Name="idacceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol_has_Acceso_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Rol_has_Acceso" Type="Self.Rol_has_Acceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="idrol" />
+            </Principal>
+            <Dependent Role="Rol_has_Acceso">
+              <PropertyRef Name="idrol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="idrol" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idrol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SistemaIntranetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Acceso" EntityType="Self.Acceso" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="Rol_has_Acceso" EntityType="Self.Rol_has_Acceso" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Rol_has_Acceso_Acceso" Association="Self.FK_Rol_has_Acceso_Acceso">
+            <End Role="Acceso" EntitySet="Acceso" />
+            <End Role="Rol_has_Acceso" EntitySet="Rol_has_Acceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol_has_Acceso_Rol" Association="Self.FK_Rol_has_Acceso_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Rol_has_Acceso" EntitySet="Rol_has_Acceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <FunctionImport Name="usp_Usuario_Acceso" ReturnType="Collection(String)">
+          <Parameter Name="idrol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_user_acceso" ReturnType="Collection(SistemaIntranetModel.usp_user_acceso_Result)">
+          <Parameter Name="idrol" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="usp_user_acceso_Result">
+          <Property Type="Int32" Name="idacceso" Nullable="false" />
+          <Property Type="String" Name="nombreAcceso" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="rutaAcceso" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="iconoAcceso" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="estadoAcceso" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SistemaIntranetModelStoreContainer" CdmEntityContainer="SistemaIntranetEntities">
+          <EntitySetMapping Name="Acceso">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Acceso">
+              <MappingFragment StoreEntitySet="Acceso">
+                <ScalarProperty Name="iconoAcceso" ColumnName="iconoAcceso" />
+                <ScalarProperty Name="idacceso" ColumnName="idacceso" />
+                <ScalarProperty Name="nombreAcceso" ColumnName="nombreAcceso" />
+                <ScalarProperty Name="rutaAcceso" ColumnName="rutaAcceso" />
+                <ScalarProperty Name="estadoAcceso" ColumnName="estadoAcceso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="idrol" ColumnName="idrol" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol_has_Acceso">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Rol_has_Acceso">
+              <MappingFragment StoreEntitySet="Rol_has_Acceso">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idrol" ColumnName="idrol" />
+                <ScalarProperty Name="idacceso" ColumnName="idacceso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="rutaImagen" ColumnName="rutaImagen" />
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+                <ScalarProperty Name="apellidoUsuario" ColumnName="apellidoUsuario" />
+                <ScalarProperty Name="dniUsuario" ColumnName="dniUsuario" />
+                <ScalarProperty Name="fechaNacUsuario" ColumnName="fechaNacUsuario" />
+                <ScalarProperty Name="direccionUsuario" ColumnName="direccionUsuario" />
+                <ScalarProperty Name="telefonoUsuario" ColumnName="telefonoUsuario" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="idrol" ColumnName="idrol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Usuario_Acceso" FunctionName="SistemaIntranetModel.Store.usp_Usuario_Acceso" />
+          <FunctionImportMapping FunctionImportName="usp_user_acceso" FunctionName="SistemaIntranetModel.Store.usp_user_acceso">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SistemaIntranetModel.usp_user_acceso_Result">
+                <ScalarProperty Name="idacceso" ColumnName="idacceso" />
+                <ScalarProperty Name="nombreAcceso" ColumnName="nombreAcceso" />
+                <ScalarProperty Name="rutaAcceso" ColumnName="rutaAcceso" />
+                <ScalarProperty Name="iconoAcceso" ColumnName="iconoAcceso" />
+                <ScalarProperty Name="estadoAcceso" ColumnName="estadoAcceso" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
