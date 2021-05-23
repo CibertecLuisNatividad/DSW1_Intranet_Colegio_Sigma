@@ -1,0 +1,40 @@
+﻿@model Proyecto_SistemaIntranet.Models.Usuario
+
+@{
+    ViewBag.Title = "ListaHorarioAlumno"; 
+}
+
+<h2 class="text-center m-15">Mi Horario Escolar - @DateTime.Now.Year</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Duracion</th>
+            <th>Bloque</th>
+            <th>Horas</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miercoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+        </tr>
+    </thead>
+    <!-
+    @{ string[] horas = { "7:30am", "8:15am", "9:00am", "9:45am", "10:30am", "11:15am", "12:00pm", "12:45pm", "1:30pm", "2:15pm", "3:00pm" }; }
+    <tbody>
+        @foreach(var item in horas)
+        {
+            <tr>
+                <td>@item</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
