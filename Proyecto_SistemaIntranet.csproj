@@ -140,6 +140,27 @@
     <Compile Include="Models\Acceso.cs">
       <DependentUpon>ModeloIntranet.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Apoderado.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Calificacion.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Carga_Academica.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Curso.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Evaluacion.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Grado.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Horario.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\ModeloIntranet.Context.cs">
       <AutoGen>True</AutoGen>
@@ -156,13 +177,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloIntranet.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Relacion.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Rol.cs">
       <DependentUpon>ModeloIntranet.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rol_has_Acceso.cs">
       <DependentUpon>ModeloIntranet.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Seccion.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoEvaluacion.cs">
       <DependentUpon>ModeloIntranet.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usp_user_acceso_Result.cs">
@@ -533,9 +569,16 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Dashboard\Principal.cshtml" />
     <Content Include="Views\Error\UnauthorizedOperation.cshtml" />
+    <Content Include="Views\Dashboard\PerfilAlumno.cshtml" />
+    <Content Include="Views\Dashboard\PerfilUsuario.cshtml" />
+    <Content Include="Views\Dashboard\Horario.cshtml" />
+    <Content Include="Views\Login\RecuperaPassword.cshtml" />
+    <Content Include="Views\Dashboard\AcercaDe.cshtml" />
+    <Content Include="Views\Dashboard\Evaluacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Evaluacion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

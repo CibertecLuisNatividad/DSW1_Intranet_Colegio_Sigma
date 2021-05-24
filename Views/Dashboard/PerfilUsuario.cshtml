@@ -1,0 +1,168 @@
+﻿
+@using Proyecto_SistemaIntranet.Models
+@{
+    ViewBag.Title = "Perfil del Usuario";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    string nombrerol = Session["Rol"].ToString();
+    Usuario obj = (Usuario)Session["Usuario"];
+    Apoderado ap = (Apoderado)Session["Apoderado"];
+}
+
+<!-- begin #content -->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+        <li class="breadcrumb-item active">Mi Perfil</li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+
+    <h1 class="page-header">Mi Perfil <small>  @nombrerol </small></h1>
+    <!-- end page-header -->
+    <!-- Empieza Contenido de Perfil de Usuario-->
+    <!-- begin row -->
+    <div class="row">
+        <!-- begin col-6 -->
+        <div class="col-xl-4 col-sm-6">
+            <!-- begin card -->
+            <div class="text-center card border-0">
+                <!-- ..\assets\img\user\user-13.jpeg -->
+                <!-- ..\assets\img\gallery\gallery-1.jpeg -->
+                <img class="card-img-top height-300" src=" @obj.rutaImagen " alt="">
+                <div class="card-body">
+                    <h2 class="card-title m-t-0 m-b-10">@nombrerol </h2>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    <a href="#modal-dialog" class=" btn btn-lg btn-danger" data-toggle="modal">Cambiar Contraseña</a>
+                </div>
+            </div>
+            <!-- end card -->
+        </div>
+        <!-- end col-6 -->
+        <!-- #modal-dialog -->
+        <div class="modal fade" id="modal-dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark">
+                        <h4 class="modal-title text-white">Cambiar Contraseña</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="cambiarPassword" method="POST">
+                            <div style="display: flex;flex-wrap: nowrap;">
+                                <div class="col-md-4 p-t-40">
+                                    <img class="width-full " src="https://firebasestorage.googleapis.com/v0/b/proyecto-daw1-9ce23.appspot.com/o/imagenes%2Fcontrasena.png?alt=media&token=e53c4946-5667-435f-87c7-6de307ddf0fa" alt="">
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="hidden" class="form-control" id="idCodigo" value="@obj.idusuario" name="u.cod_usuario">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="f-s-14"><b>Contraseña Actual</b></label>
+                                        <input data-toggle="password" data-placement="after" type="password" class="form-control" id="exampleInputEmail1" name="actual" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="f-s-14"><b>Nueva Contraseña</b></label>
+                                        <input data-toggle="password" data-placement="after" type="password" class="form-control" id="exampleInputEmail1" name="u.contrasena_usuario" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="f-s-14"><b>Confirmar Nueva Contraseña</b></label>
+                                        <input data-toggle="password" data-placement="after" type="password" class="form-control" id="exampleInputEmail1" name="confirmar" required="required">
+                                    </div>
+
+
+                                </div>
+
+                            </div><br><br>
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-lg btn-inverse m-r-25">Guardar Cambios</button>
+                                <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- begin col-6 -->
+        <div class="col-xl-8 col-sm-6">
+            <!-- begin panel -->
+            <div class="panel panel-inverse">
+                <!-- begin panel-heading -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">Datos Personales del @nombrerol </h4>
+
+
+                </div>
+                <!-- end panel-heading -->
+                <!-- begin panel-body -->
+                @if (ViewBag.Mensaje != null)
+                {
+                    <div class="alert alert-success fade show " id="alerta">
+                        <span class="close" data-dismiss="alert" style="cursor:pointer">×</span>
+                        <strong><s:property value="ViewBag.Mensaje" /></strong>
+                    </div>
+                }
+                <div class="panel-body">
+                    <form action="ServletUsuario?accion=ACTUALIZAR_PERFIL" method="POST">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"><b>Nombres</b></label>
+                                        <input type="text" class="form-control" id="idNombre" disabled value="@obj.nombreUsuario" name="nombre">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"><b>Dirección</b></label>
+                                        <input type="text" class="form-control" id="idApellido" disabled value="@obj.direccionUsuario" name="apellido">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"><b>DNI</b></label>
+                                        <input type="text" class="form-control" id="idCodigo" readonly value="@obj.dniUsuario" name="codigo">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"><b>Apellidos</b></label>
+                                        <input type="text" class="form-control" id="idApellido" disabled value="@obj.apellidoUsuario" name="apellido">
+                                    </div>
+                                    <div class="form-group ">
+                                        <label><b>Fecha de Nacimiento</b></label>
+                                        <input type="date" class="form-control" id="fechaNac" name="fechanacimiento" disabled value="@obj.fechaNacUsuario">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"><b>Teléfono</b></label>
+                                        <input type="text" class="form-control" id="idApellido" disabled value="@obj.telefonoUsuario" name="apellido">
+                                    </div>
+                                </div>
+                             
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- end panel-body -->
+
+            </div>
+            <!-- end panel -->
+          
+        </div>
+        <!-- end col-6 -->
+
+    </div>
+    <!-- end row -->
+    <!-- Termina Contenido de Perfil de Usuario-->
+
+</div>
+<!-- end #content -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        setTimeout(function () {
+            $("#alerta").alert('close');
+        }, 3000);
+    });
+</script>
+<script src="assets\plugins\jquery-sparkline\jquery.sparkline.min.js"></script>
+<script src="assets\plugins\bootstrap-datepicker\dist\js\bootstrap-datepicker.js"></script>
+<script src="assets\plugins\bootstrap-timepicker\js\bootstrap-timepicker.min.js"></script>
+<script src="assets\plugins\bootstrap-show-password\dist\bootstrap-show-password.js"></script>
+<script src="assets\js\demo\form-plugins.demo.js"></script>
+

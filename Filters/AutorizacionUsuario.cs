@@ -23,7 +23,7 @@ namespace Proyecto_SistemaIntranet.Filters
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             String nombreMenu = "";
-            String nombreModulo = "";
+            
             try
             {
                 oUsuario = (Usuario)HttpContext.Current.Session["Usuario"];

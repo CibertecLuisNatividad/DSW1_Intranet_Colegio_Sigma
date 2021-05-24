@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "Horario";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+<!-- begin #content -->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+        <li class="breadcrumb-item active">Mi Horario</li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <h1 class="page-header">Mi Horario Escolar <small> </small></h1>
+    <!-- end page-header -->
+    <!-- begin panel -->
+    <div class="panel panel-success">
+        <!-- begin panel-heading -->
+        <div class="panel-heading">
+            <h4 class="panel-title f-s-15 text-center">CICLO ACADÉMICO 2021-1  FECHA: 20/05/2021</h4>
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <!-- end panel-heading -->
+        <!-- begin panel-body -->
+        <div class="panel-body">
+            <table id="data-table-default" class="table table-striped table-bordered ">
+                <thead>
+                    <tr>
+                        <th class="all text-white bg-gradient-blue" width="15%">Hora</th>
+                        <th class="all text-white bg-gradient-blue" width="17%">Lunes</th>
+                        <th class="all text-white bg-gradient-blue" width="17%">Martes</th>
+                        <th class="all text-white bg-gradient-blue" width="17%">Miercoles</th>
+                        <th class="all text-white bg-gradient-blue" width="17%">Jueves</th>
+                        <th class="all text-white bg-gradient-blue" width="17%">Viernes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr height="100px" class="text-center">
+                        <td width="15%" class="f-s-20 f-w-700 text-white bg-gradient-blue">07:00 - 8:00 am</td>
+                        <td class="text-white bg-gradient-aqua  f-s-15 f-w-400">
+                            Curso: Matematica <br />
+                            Seccion: E  <br />
+                            Docente: Mario Jimenez Gutierrez
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Lenguaje <br />
+                            Seccion: C  <br />
+                            Docente: Julisa Romero Martinez
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Historia <br />
+                            Seccion: B  <br />
+                            Docente: Martin Gomez Sandón
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Física <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Algebra <br />
+                            Seccion: E  <br />
+                            Docente: Juan Alvarado Flor
+                        </td>
+                    </tr>
+                    <tr height="100px" class="text-center">
+                        <td width="15%" class="f-s-20 f-w-700 text-center text-white bg-gradient-blue">08:00 - 9:00 am</td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Física <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Raz. Matemático <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Raz. Verbal <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Trigonometría <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Lenguaje <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                    </tr>
+                    <tr height="100px" class="text-center">
+                        <td width="15%" class="f-s-20 f-w-700 text-center text-white bg-gradient-blue">10:00 - 11:00 am</td>
+                        <td class="text-white bg-gradient-aqua  f-s-15 f-w-400">
+                            Curso: Matematica <br />
+                            Seccion: E  <br />
+                            Docente: Mario Jimenez Gutierrez
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Lenguaje <br />
+                            Seccion: C  <br />
+                            Docente: Julisa Romero Martinez
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Historia <br />
+                            Seccion: B  <br />
+                            Docente: Martin Gomez Sandón
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Física <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Algebra <br />
+                            Seccion: E  <br />
+                            Docente: Juan Alvarado Flor
+                        </td>
+                    </tr>
+                    <tr height="100px" class="text-center">
+                        <td width="15%" class="f-s-20 f-w-700 text-center text-white bg-gradient-blue">11:00 - 12:00 am</td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Física <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Raz. Matemático <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Raz. Verbal <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Trigonometría <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Lenguaje <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                    </tr>
+                    <tr height="100px" class="text-center">
+                        <td width="15%" class="f-s-20 f-w-700 text-white bg-gradient-blue">12:00 - 13:00 pm</td>
+                        <td class="text-white bg-gradient-aqua  f-s-15 f-w-400">
+                            Curso: Matematica <br />
+                            Seccion: E  <br />
+                            Docente: Mario Jimenez Gutierrez
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Lenguaje <br />
+                            Seccion: C  <br />
+                            Docente: Julisa Romero Martinez
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Historia <br />
+                            Seccion: B  <br />
+                            Docente: Martin Gomez Sandón
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Física <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
+                            Curso: Algebra <br />
+                            Seccion: E  <br />
+                            Docente: Juan Alvarado Flor
+                        </td>
+                    </tr>
+                    <tr height="100px" class="text-center">
+                        <td width="15%" class="f-s-20 f-w-700 text-white bg-gradient-blue">13:00 - 14:00 pm</td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Física <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Raz. Matemático <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Raz. Verbal <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Trigonometría <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
+                            Curso: Lenguaje <br />
+                            Seccion: A  <br />
+                            Docente: Pablo Gomez Hurtado
+                        </td>
+                    </tr>
+                    @*
+                    <tr height="100px" class="table-info">
+                        <td width="15%"    class="f-s-600 text-inverse">11:00 12:00</td>
+                        <td>Matematica -Seccion E <a href="#">Docente</a>dsdsdsdsdsds</td>
+                        <td>Internet Explorer 4.0</td>
+                        <td>Win 95+</td>
+                        <td>4</td>
+                        <td>X</td>
+                    </tr>
+                    <tr height="100px" >
+                        <td width="15%"   class="f-s-600 text-inverse">12:00 13:00</td>
+                        <td>Matematica -Seccion E <a href="#">Docente</a>dsdsdsdsdsds</td>
+                        <td>Internet Explorer 4.0</td>
+                        <td>Win 95+</td>
+                        <td>4</td>
+                        <td>X</td>
+                    </tr>*@
+
+                </tbody>
+            </table>
+        </div>
+        <!-- end panel-body -->
+    </div>
+    <!-- end panel -->
+</div>
+<!-- end #content -->

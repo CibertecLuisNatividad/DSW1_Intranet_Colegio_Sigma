@@ -15,6 +15,91 @@
           <Property Name="iconoAcceso" Type="varchar" MaxLength="30" />
           <Property Name="estadoAcceso" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Apoderado">
+          <Key>
+            <PropertyRef Name="idapoderado" />
+          </Key>
+          <Property Name="idapoderado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreApoderado" Type="varchar" MaxLength="50" />
+          <Property Name="apellidoApoderado" Type="varchar" MaxLength="50" />
+          <Property Name="dniApoderado" Type="varchar" MaxLength="8" />
+          <Property Name="direccionApoderado" Type="varchar" MaxLength="150" />
+          <Property Name="profesionApoderado" Type="varchar" MaxLength="150" />
+          <Property Name="telefonoApoderado" Type="varchar" MaxLength="9" />
+          <Property Name="idrelacion" Type="int" Nullable="false" />
+          <Property Name="idusuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Calificacion">
+          <Key>
+            <PropertyRef Name="idcalificacion" />
+          </Key>
+          <Property Name="idcalificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="notaCalificacion" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="periodoCalificacion" Type="varchar" MaxLength="20" />
+          <Property Name="comentarioAlumno" Type="varchar" MaxLength="150" />
+          <Property Name="rutaCalificacion" Type="varchar" MaxLength="200" />
+          <Property Name="estadoCalificacion" Type="varchar" MaxLength="20" />
+          <Property Name="comentarioDocente" Type="varchar" MaxLength="150" />
+          <Property Name="idevaluacion" Type="int" Nullable="false" />
+          <Property Name="idusuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Carga_Academica">
+          <Key>
+            <PropertyRef Name="idcarga" />
+          </Key>
+          <Property Name="idcarga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idcurso" Type="int" Nullable="false" />
+          <Property Name="idusuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="idcurso" />
+          </Key>
+          <Property Name="idcurso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCurso" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Evaluacion">
+          <Key>
+            <PropertyRef Name="idevaluacion" />
+          </Key>
+          <Property Name="idevaluacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tituloEvaluacion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="fechaInicio" Type="date" Nullable="false" />
+          <Property Name="horaInicio" Type="int" Nullable="false" />
+          <Property Name="fechaFin" Type="date" Nullable="false" />
+          <Property Name="horaFin" Type="int" Nullable="false" />
+          <Property Name="observacionEvaluacion" Type="varchar" MaxLength="300" />
+          <Property Name="rutaEvaluacion" Type="varchar" MaxLength="200" />
+          <Property Name="estadoEvaluacion" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="idcurso" Type="int" Nullable="false" />
+          <Property Name="idtipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grado">
+          <Key>
+            <PropertyRef Name="idgrado" />
+          </Key>
+          <Property Name="idgrado" Type="int" Nullable="false" />
+          <Property Name="nombreGrado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Horario">
+          <Key>
+            <PropertyRef Name="idhorario" />
+          </Key>
+          <Property Name="idhorario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="diaHorario" Type="varchar" MaxLength="30" />
+          <Property Name="horaInicio" Type="int" />
+          <Property Name="horaFin" Type="int" />
+          <Property Name="idseccion" Type="int" Nullable="false" />
+          <Property Name="idgrado" Type="int" Nullable="false" />
+          <Property Name="idcurso" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Relacion">
+          <Key>
+            <PropertyRef Name="idrelacion" />
+          </Key>
+          <Property Name="idrelacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="idrol" />
@@ -30,6 +115,13 @@
           <Property Name="idrol" Type="int" Nullable="false" />
           <Property Name="idacceso" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Seccion">
+          <Key>
+            <PropertyRef Name="idseccion" />
+          </Key>
+          <Property Name="idseccion" Type="int" Nullable="false" />
+          <Property Name="nombreSeccion" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -39,6 +131,13 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoEvaluacion">
+          <Key>
+            <PropertyRef Name="idtipo" />
+          </Key>
+          <Property Name="idtipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreTipo" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -55,7 +154,140 @@
           <Property Name="password" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="idrol" Type="int" Nullable="false" />
           <Property Name="rutaImagen" Type="varchar" MaxLength="500" />
+          <Property Name="emailUsuario" Type="varchar" MaxLength="100" />
         </EntityType>
+        <Association Name="FK_Apoderado_Relacion">
+          <End Role="Relacion" Type="Self.Relacion" Multiplicity="1" />
+          <End Role="Apoderado" Type="Self.Apoderado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Relacion">
+              <PropertyRef Name="idrelacion" />
+            </Principal>
+            <Dependent Role="Apoderado">
+              <PropertyRef Name="idrelacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Apoderado_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Apoderado" Type="Self.Apoderado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="Apoderado">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Calificacion_Evaluacion">
+          <End Role="Evaluacion" Type="Self.Evaluacion" Multiplicity="1" />
+          <End Role="Calificacion" Type="Self.Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evaluacion">
+              <PropertyRef Name="idevaluacion" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idevaluacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Calificacion_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Calificacion" Type="Self.Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carga_Academica_Curso">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+          <End Role="Carga_Academica" Type="Self.Carga_Academica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="idcurso" />
+            </Principal>
+            <Dependent Role="Carga_Academica">
+              <PropertyRef Name="idcurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carga_Academica_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Carga_Academica" Type="Self.Carga_Academica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="Carga_Academica">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evaluacion_Curso">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+          <End Role="Evaluacion" Type="Self.Evaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="idcurso" />
+            </Principal>
+            <Dependent Role="Evaluacion">
+              <PropertyRef Name="idcurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evaluacion_TipoEvaluacion">
+          <End Role="TipoEvaluacion" Type="Self.TipoEvaluacion" Multiplicity="1" />
+          <End Role="Evaluacion" Type="Self.Evaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEvaluacion">
+              <PropertyRef Name="idtipo" />
+            </Principal>
+            <Dependent Role="Evaluacion">
+              <PropertyRef Name="idtipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_Curso">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+          <End Role="Horario" Type="Self.Horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="idcurso" />
+            </Principal>
+            <Dependent Role="Horario">
+              <PropertyRef Name="idcurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_Grado">
+          <End Role="Grado" Type="Self.Grado" Multiplicity="1" />
+          <End Role="Horario" Type="Self.Horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado">
+              <PropertyRef Name="idgrado" />
+            </Principal>
+            <Dependent Role="Horario">
+              <PropertyRef Name="idgrado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_Seccion">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="1" />
+          <End Role="Horario" Type="Self.Horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="idseccion" />
+            </Principal>
+            <Dependent Role="Horario">
+              <PropertyRef Name="idseccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Rol_has_Acceso_Acceso">
           <End Role="Acceso" Type="Self.Acceso" Multiplicity="1" />
           <End Role="Rol_has_Acceso" Type="Self.Rol_has_Acceso" Multiplicity="*" />
@@ -92,18 +324,104 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_user_acceso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idrol" Type="int" Mode="In" />
+          <Parameter Name="idusuario" Type="int" Mode="In" />
         </Function>
         <Function Name="usp_Usuario_Acceso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idrol" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="SistemaIntranetModelStoreContainer">
           <EntitySet Name="Acceso" EntityType="Self.Acceso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Apoderado" EntityType="Self.Apoderado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Calificacion" EntityType="Self.Calificacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carga_Academica" EntityType="Self.Carga_Academica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Curso" EntityType="Self.Curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evaluacion" EntityType="Self.Evaluacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grado" EntityType="Self.Grado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horario" EntityType="Self.Horario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Relacion" EntityType="Self.Relacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol_has_Acceso" EntityType="Self.Rol_has_Acceso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seccion" EntityType="Self.Seccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoEvaluacion" EntityType="Self.TipoEvaluacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Apoderado_Relacion" Association="Self.FK_Apoderado_Relacion">
+            <End Role="Relacion" EntitySet="Relacion" />
+            <End Role="Apoderado" EntitySet="Apoderado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Apoderado_Usuario" Association="Self.FK_Apoderado_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Apoderado" EntitySet="Apoderado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Calificacion_Evaluacion" Association="Self.FK_Calificacion_Evaluacion">
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Calificacion_Usuario" Association="Self.FK_Calificacion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carga_Academica_Curso" Association="Self.FK_Carga_Academica_Curso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Carga_Academica" EntitySet="Carga_Academica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carga_Academica_Usuario" Association="Self.FK_Carga_Academica_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Carga_Academica" EntitySet="Carga_Academica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluacion_Curso" Association="Self.FK_Evaluacion_Curso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluacion_TipoEvaluacion" Association="Self.FK_Evaluacion_TipoEvaluacion">
+            <End Role="TipoEvaluacion" EntitySet="TipoEvaluacion" />
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_Curso" Association="Self.FK_Horario_Curso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Horario" EntitySet="Horario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_Grado" Association="Self.FK_Horario_Grado">
+            <End Role="Grado" EntitySet="Grado" />
+            <End Role="Horario" EntitySet="Horario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_Seccion" Association="Self.FK_Horario_Seccion">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="Horario" EntitySet="Horario" />
+          </AssociationSet>
           <AssociationSet Name="FK_Rol_has_Acceso_Acceso" Association="Self.FK_Rol_has_Acceso_Acceso">
             <End Role="Acceso" EntitySet="Acceso" />
             <End Role="Rol_has_Acceso" EntitySet="Rol_has_Acceso" />
@@ -177,6 +495,10 @@
           <Property Name="idrol" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Rol" Relationship="Self.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
           <Property Name="rutaImagen" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Apoderado" Relationship="SistemaIntranetModel.FK_Apoderado_Usuario" FromRole="Usuario" ToRole="Apoderado" />
+          <NavigationProperty Name="Calificacion" Relationship="SistemaIntranetModel.FK_Calificacion_Usuario" FromRole="Usuario" ToRole="Calificacion" />
+          <NavigationProperty Name="Carga_Academica" Relationship="SistemaIntranetModel.FK_Carga_Academica_Usuario" FromRole="Usuario" ToRole="Carga_Academica" />
+          <Property Name="emailUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Rol_has_Acceso_Acceso">
           <End Role="Acceso" Type="Self.Acceso" Multiplicity="1" />
@@ -236,8 +558,93 @@
           <Parameter Name="idrol" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_user_acceso" ReturnType="Collection(SistemaIntranetModel.usp_user_acceso_Result)">
-          <Parameter Name="idrol" Mode="In" Type="Int32" />
+            <Parameter Name="idrol" Mode="In" Type="Int32" />
+            <Parameter Name="idusuario" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Apoderado" EntityType="SistemaIntranetModel.Apoderado" />
+          <EntitySet Name="Calificacion" EntityType="SistemaIntranetModel.Calificacion" />
+          <EntitySet Name="Carga_Academica" EntityType="SistemaIntranetModel.Carga_Academica" />
+          <EntitySet Name="Curso" EntityType="SistemaIntranetModel.Curso" />
+          <EntitySet Name="Evaluacion" EntityType="SistemaIntranetModel.Evaluacion" />
+          <EntitySet Name="Grado" EntityType="SistemaIntranetModel.Grado" />
+          <EntitySet Name="Horario" EntityType="SistemaIntranetModel.Horario" />
+          <EntitySet Name="Relacion" EntityType="SistemaIntranetModel.Relacion" />
+          <EntitySet Name="Seccion" EntityType="SistemaIntranetModel.Seccion" />
+          <EntitySet Name="TipoEvaluacion" EntityType="SistemaIntranetModel.TipoEvaluacion" />
+          <AssociationSet Name="FK_Apoderado_Relacion" Association="SistemaIntranetModel.FK_Apoderado_Relacion">
+            <End Role="Relacion" EntitySet="Relacion" />
+            <End Role="Apoderado" EntitySet="Apoderado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Apoderado_Usuario" Association="SistemaIntranetModel.FK_Apoderado_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Apoderado" EntitySet="Apoderado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Calificacion_Evaluacion" Association="SistemaIntranetModel.FK_Calificacion_Evaluacion">
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Calificacion_Usuario" Association="SistemaIntranetModel.FK_Calificacion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carga_Academica_Curso" Association="SistemaIntranetModel.FK_Carga_Academica_Curso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Carga_Academica" EntitySet="Carga_Academica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carga_Academica_Usuario" Association="SistemaIntranetModel.FK_Carga_Academica_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Carga_Academica" EntitySet="Carga_Academica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluacion_Curso" Association="SistemaIntranetModel.FK_Evaluacion_Curso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_Curso" Association="SistemaIntranetModel.FK_Horario_Curso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Horario" EntitySet="Horario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluacion_TipoEvaluacion" Association="SistemaIntranetModel.FK_Evaluacion_TipoEvaluacion">
+            <End Role="TipoEvaluacion" EntitySet="TipoEvaluacion" />
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_Grado" Association="SistemaIntranetModel.FK_Horario_Grado">
+            <End Role="Grado" EntitySet="Grado" />
+            <End Role="Horario" EntitySet="Horario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_Seccion" Association="SistemaIntranetModel.FK_Horario_Seccion">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="Horario" EntitySet="Horario" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SistemaIntranetModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SistemaIntranetModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <ComplexType Name="usp_user_acceso_Result">
           <Property Type="Int32" Name="idacceso" Nullable="false" />
@@ -245,6 +652,267 @@
           <Property Type="String" Name="rutaAcceso" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="iconoAcceso" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="estadoAcceso" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Apoderado">
+          <Key>
+            <PropertyRef Name="idapoderado" />
+          </Key>
+          <Property Name="idapoderado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreApoderado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellidoApoderado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dniApoderado" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="direccionApoderado" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="profesionApoderado" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefonoApoderado" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="idrelacion" Type="Int32" Nullable="false" />
+          <Property Name="idusuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Relacion" Relationship="SistemaIntranetModel.FK_Apoderado_Relacion" FromRole="Apoderado" ToRole="Relacion" />
+          <NavigationProperty Name="Usuario" Relationship="SistemaIntranetModel.FK_Apoderado_Usuario" FromRole="Apoderado" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Calificacion">
+          <Key>
+            <PropertyRef Name="idcalificacion" />
+          </Key>
+          <Property Name="idcalificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="notaCalificacion" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="periodoCalificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="comentarioAlumno" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="rutaCalificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estadoCalificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="comentarioDocente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="idevaluacion" Type="Int32" Nullable="false" />
+          <Property Name="idusuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Evaluacion" Relationship="SistemaIntranetModel.FK_Calificacion_Evaluacion" FromRole="Calificacion" ToRole="Evaluacion" />
+          <NavigationProperty Name="Usuario" Relationship="SistemaIntranetModel.FK_Calificacion_Usuario" FromRole="Calificacion" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Carga_Academica">
+          <Key>
+            <PropertyRef Name="idcarga" />
+          </Key>
+          <Property Name="idcarga" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idcurso" Type="Int32" Nullable="false" />
+          <Property Name="idusuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curso" Relationship="SistemaIntranetModel.FK_Carga_Academica_Curso" FromRole="Carga_Academica" ToRole="Curso" />
+          <NavigationProperty Name="Usuario" Relationship="SistemaIntranetModel.FK_Carga_Academica_Usuario" FromRole="Carga_Academica" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="idcurso" />
+          </Key>
+          <Property Name="idcurso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCurso" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Carga_Academica" Relationship="SistemaIntranetModel.FK_Carga_Academica_Curso" FromRole="Curso" ToRole="Carga_Academica" />
+          <NavigationProperty Name="Evaluacion" Relationship="SistemaIntranetModel.FK_Evaluacion_Curso" FromRole="Curso" ToRole="Evaluacion" />
+          <NavigationProperty Name="Horario" Relationship="SistemaIntranetModel.FK_Horario_Curso" FromRole="Curso" ToRole="Horario" />
+        </EntityType>
+        <EntityType Name="Evaluacion">
+          <Key>
+            <PropertyRef Name="idevaluacion" />
+          </Key>
+          <Property Name="idevaluacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tituloEvaluacion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="horaInicio" Type="Int32" Nullable="false" />
+          <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="horaFin" Type="Int32" Nullable="false" />
+          <Property Name="observacionEvaluacion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="rutaEvaluacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estadoEvaluacion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="idcurso" Type="Int32" Nullable="false" />
+          <Property Name="idtipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Calificacion" Relationship="SistemaIntranetModel.FK_Calificacion_Evaluacion" FromRole="Evaluacion" ToRole="Calificacion" />
+          <NavigationProperty Name="Curso" Relationship="SistemaIntranetModel.FK_Evaluacion_Curso" FromRole="Evaluacion" ToRole="Curso" />
+          <NavigationProperty Name="TipoEvaluacion" Relationship="SistemaIntranetModel.FK_Evaluacion_TipoEvaluacion" FromRole="Evaluacion" ToRole="TipoEvaluacion" />
+        </EntityType>
+        <EntityType Name="Grado">
+          <Key>
+            <PropertyRef Name="idgrado" />
+          </Key>
+          <Property Name="idgrado" Type="Int32" Nullable="false" />
+          <Property Name="nombreGrado" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Horario" Relationship="SistemaIntranetModel.FK_Horario_Grado" FromRole="Grado" ToRole="Horario" />
+        </EntityType>
+        <EntityType Name="Horario">
+          <Key>
+            <PropertyRef Name="idhorario" />
+          </Key>
+          <Property Name="idhorario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="diaHorario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="horaInicio" Type="Int32" />
+          <Property Name="horaFin" Type="Int32" />
+          <Property Name="idseccion" Type="Int32" Nullable="false" />
+          <Property Name="idgrado" Type="Int32" Nullable="false" />
+          <Property Name="idcurso" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curso" Relationship="SistemaIntranetModel.FK_Horario_Curso" FromRole="Horario" ToRole="Curso" />
+          <NavigationProperty Name="Grado" Relationship="SistemaIntranetModel.FK_Horario_Grado" FromRole="Horario" ToRole="Grado" />
+          <NavigationProperty Name="Seccion" Relationship="SistemaIntranetModel.FK_Horario_Seccion" FromRole="Horario" ToRole="Seccion" />
+        </EntityType>
+        <EntityType Name="Relacion">
+          <Key>
+            <PropertyRef Name="idrelacion" />
+          </Key>
+          <Property Name="idrelacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Apoderado" Relationship="SistemaIntranetModel.FK_Apoderado_Relacion" FromRole="Relacion" ToRole="Apoderado" />
+        </EntityType>
+        <EntityType Name="Seccion">
+          <Key>
+            <PropertyRef Name="idseccion" />
+          </Key>
+          <Property Name="idseccion" Type="Int32" Nullable="false" />
+          <Property Name="nombreSeccion" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Horario" Relationship="SistemaIntranetModel.FK_Horario_Seccion" FromRole="Seccion" ToRole="Horario" />
+        </EntityType>
+        <EntityType Name="TipoEvaluacion">
+          <Key>
+            <PropertyRef Name="idtipo" />
+          </Key>
+          <Property Name="idtipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreTipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Evaluacion" Relationship="SistemaIntranetModel.FK_Evaluacion_TipoEvaluacion" FromRole="TipoEvaluacion" ToRole="Evaluacion" />
+        </EntityType>
+        <Association Name="FK_Apoderado_Relacion">
+          <End Type="SistemaIntranetModel.Relacion" Role="Relacion" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Apoderado" Role="Apoderado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Relacion">
+              <PropertyRef Name="idrelacion" />
+            </Principal>
+            <Dependent Role="Apoderado">
+              <PropertyRef Name="idrelacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Apoderado_Usuario">
+          <End Type="SistemaIntranetModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Apoderado" Role="Apoderado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="Apoderado">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Calificacion_Evaluacion">
+          <End Type="SistemaIntranetModel.Evaluacion" Role="Evaluacion" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Calificacion" Role="Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evaluacion">
+              <PropertyRef Name="idevaluacion" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idevaluacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Calificacion_Usuario">
+          <End Type="SistemaIntranetModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Calificacion" Role="Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carga_Academica_Curso">
+          <End Type="SistemaIntranetModel.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Carga_Academica" Role="Carga_Academica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="idcurso" />
+            </Principal>
+            <Dependent Role="Carga_Academica">
+              <PropertyRef Name="idcurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carga_Academica_Usuario">
+          <End Type="SistemaIntranetModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Carga_Academica" Role="Carga_Academica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="Carga_Academica">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evaluacion_Curso">
+          <End Type="SistemaIntranetModel.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Evaluacion" Role="Evaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="idcurso" />
+            </Principal>
+            <Dependent Role="Evaluacion">
+              <PropertyRef Name="idcurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_Curso">
+          <End Type="SistemaIntranetModel.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Horario" Role="Horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="idcurso" />
+            </Principal>
+            <Dependent Role="Horario">
+              <PropertyRef Name="idcurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evaluacion_TipoEvaluacion">
+          <End Type="SistemaIntranetModel.TipoEvaluacion" Role="TipoEvaluacion" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Evaluacion" Role="Evaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEvaluacion">
+              <PropertyRef Name="idtipo" />
+            </Principal>
+            <Dependent Role="Evaluacion">
+              <PropertyRef Name="idtipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_Grado">
+          <End Type="SistemaIntranetModel.Grado" Role="Grado" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Horario" Role="Horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado">
+              <PropertyRef Name="idgrado" />
+            </Principal>
+            <Dependent Role="Horario">
+              <PropertyRef Name="idgrado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_Seccion">
+          <End Type="SistemaIntranetModel.Seccion" Role="Seccion" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Horario" Role="Horario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="idseccion" />
+            </Principal>
+            <Dependent Role="Horario">
+              <PropertyRef Name="idseccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -294,6 +962,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="SistemaIntranetModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="emailUsuario" ColumnName="emailUsuario" />
                 <ScalarProperty Name="rutaImagen" ColumnName="rutaImagen" />
                 <ScalarProperty Name="idusuario" ColumnName="idusuario" />
                 <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
@@ -320,6 +989,139 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Apoderado">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Apoderado">
+              <MappingFragment StoreEntitySet="Apoderado">
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="idrelacion" ColumnName="idrelacion" />
+                <ScalarProperty Name="telefonoApoderado" ColumnName="telefonoApoderado" />
+                <ScalarProperty Name="profesionApoderado" ColumnName="profesionApoderado" />
+                <ScalarProperty Name="direccionApoderado" ColumnName="direccionApoderado" />
+                <ScalarProperty Name="dniApoderado" ColumnName="dniApoderado" />
+                <ScalarProperty Name="apellidoApoderado" ColumnName="apellidoApoderado" />
+                <ScalarProperty Name="nombreApoderado" ColumnName="nombreApoderado" />
+                <ScalarProperty Name="idapoderado" ColumnName="idapoderado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Calificacion">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Calificacion">
+              <MappingFragment StoreEntitySet="Calificacion">
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="idevaluacion" ColumnName="idevaluacion" />
+                <ScalarProperty Name="comentarioDocente" ColumnName="comentarioDocente" />
+                <ScalarProperty Name="estadoCalificacion" ColumnName="estadoCalificacion" />
+                <ScalarProperty Name="rutaCalificacion" ColumnName="rutaCalificacion" />
+                <ScalarProperty Name="comentarioAlumno" ColumnName="comentarioAlumno" />
+                <ScalarProperty Name="periodoCalificacion" ColumnName="periodoCalificacion" />
+                <ScalarProperty Name="notaCalificacion" ColumnName="notaCalificacion" />
+                <ScalarProperty Name="idcalificacion" ColumnName="idcalificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carga_Academica">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Carga_Academica">
+              <MappingFragment StoreEntitySet="Carga_Academica">
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="idcurso" ColumnName="idcurso" />
+                <ScalarProperty Name="idcarga" ColumnName="idcarga" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Curso">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Curso">
+              <MappingFragment StoreEntitySet="Curso">
+                <ScalarProperty Name="nombreCurso" ColumnName="nombreCurso" />
+                <ScalarProperty Name="idcurso" ColumnName="idcurso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evaluacion">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Evaluacion">
+              <MappingFragment StoreEntitySet="Evaluacion">
+                <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+                <ScalarProperty Name="idcurso" ColumnName="idcurso" />
+                <ScalarProperty Name="estadoEvaluacion" ColumnName="estadoEvaluacion" />
+                <ScalarProperty Name="rutaEvaluacion" ColumnName="rutaEvaluacion" />
+                <ScalarProperty Name="observacionEvaluacion" ColumnName="observacionEvaluacion" />
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="tituloEvaluacion" ColumnName="tituloEvaluacion" />
+                <ScalarProperty Name="idevaluacion" ColumnName="idevaluacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grado">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Grado">
+              <MappingFragment StoreEntitySet="Grado">
+                <ScalarProperty Name="nombreGrado" ColumnName="nombreGrado" />
+                <ScalarProperty Name="idgrado" ColumnName="idgrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horario">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Horario">
+              <MappingFragment StoreEntitySet="Horario">
+                <ScalarProperty Name="idcurso" ColumnName="idcurso" />
+                <ScalarProperty Name="idgrado" ColumnName="idgrado" />
+                <ScalarProperty Name="idseccion" ColumnName="idseccion" />
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="diaHorario" ColumnName="diaHorario" />
+                <ScalarProperty Name="idhorario" ColumnName="idhorario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Relacion">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Relacion">
+              <MappingFragment StoreEntitySet="Relacion">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idrelacion" ColumnName="idrelacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seccion">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Seccion">
+              <MappingFragment StoreEntitySet="Seccion">
+                <ScalarProperty Name="nombreSeccion" ColumnName="nombreSeccion" />
+                <ScalarProperty Name="idseccion" ColumnName="idseccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoEvaluacion">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.TipoEvaluacion">
+              <MappingFragment StoreEntitySet="TipoEvaluacion">
+                <ScalarProperty Name="nombreTipo" ColumnName="nombreTipo" />
+                <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SistemaIntranetModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SistemaIntranetModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SistemaIntranetModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="SistemaIntranetModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SistemaIntranetModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="SistemaIntranetModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SistemaIntranetModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SistemaIntranetModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SistemaIntranetModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

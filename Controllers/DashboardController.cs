@@ -10,32 +10,95 @@ namespace Proyecto_SistemaIntranet.Controllers
     public class DashboardController : Controller
     {
         private SistemaIntranetEntities db = new SistemaIntranetEntities();
+        Usuario usuario;
         // GET: Dashboard
         public ActionResult Principal()
         {
             // List<Menu> menuUsuario = (List<Menu>) Session["Menu"];
-            Usuario objUsuario = (Usuario)Session["Usuario"];
+            usuario = (Usuario)Session["Usuario"];
             
-            if(objUsuario != null)
+            if(usuario != null)
             {
-                //Buscamos los accesos que tiene el usuario
-                var menuUsuario = (from m in db.usp_user_acceso(objUsuario.idrol) select m);
-                //Nombre del Rol de Usuario
-                string nombreRol = (from r in db.Rol where r.idrol == objUsuario.idrol select r.descripcion).FirstOrDefault();
-                // ViewBag.menu = menuUsuario;
-                //ViewBag.usuario = objUsuario;
-                //ViewBag.nombreRol = nombreRol;
-                Session["Rol"] = nombreRol;
-                Session["Menu"] = menuUsuario.ToList();
-
-
-                return View(Session["Menu"]);
-
+                return View();
             }
 
             return RedirectToAction("Login","Login");
 
         }
+
+        public ActionResult Perfil()
+        {
+            usuario = (Usuario)Session["Usuario"];
+
+            if (usuario.idrol == 2)
+            {
+                return RedirectToAction("PerfilAlumno", "Dashboard");
+            }
+            return RedirectToAction("PerfilUsuario", "Dashboard");
+        }
+
+        public ActionResult PerfilAlumno()
+        {
+            Apoderado apoderado;
+            usuario = (Usuario)Session["Usuario"];
+ 
+            var ap = (from a in db.Apoderado where a.idusuario == usuario.idusuario select a).FirstOrDefault();
+            if (ap != null)
+            {
+                apoderado = ap;
+            }
+            else
+            {
+                apoderado = new Apoderado()
+                {
+                    idapoderado = 0,
+                    nombreApoderado = "Pendiente",
+                    apellidoApoderado = "Pendiente",
+                    dniApoderado = "Pendiente",
+                    direccionApoderado = "Pendiente",
+                    profesionApoderado = "Pendiente",
+                    telefonoApoderado = "Pendiente",
+                    idrelacion = -1,
+                    idusuario = 0
+                };
+            }
+            ViewBag.idRelacion = new SelectList(db.Relacion, "idrelacion", "descripcion");
+            Session["Apoderado"] = apoderado;
+            return View();
+        }
+
+        public ActionResult PerfilUsuario()
+        {
+           
+            return View();
+        }
+
+        public ActionResult Horario()
+        {
+
+            usuario = (Usuario)Session["Usuario"];
+
+            if (usuario != null)
+            {
+                return View();
+            }
+
+            return RedirectToAction("Login", "Login");
+        }
+
+        public ActionResult AcercaDe()
+        {
+           
+            return View();
+        }
+
+        public ActionResult Evaluacion()
+        {
+            return View();
+        }
+
+
+
 
         [AutorizacionUsuario(idAcceso:1)]
         public ActionResult Index()

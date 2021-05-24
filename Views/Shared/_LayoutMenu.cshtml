@@ -1,9 +1,11 @@
-﻿@model IEnumerable<Proyecto_SistemaIntranet.Models.usp_user_acceso_Result>
+﻿
 @using  Proyecto_SistemaIntranet.Models
 
 @{ 
     Usuario obj = (Usuario)Session["Usuario"];
+    List<usp_user_acceso_Result> menu = (List<usp_user_acceso_Result>) Session["Menu"];
     string nombrerol = Session["Rol"].ToString();
+
 }
 <!DOCTYPE html>
 
@@ -17,6 +19,12 @@
     <!-- begin Estilo de Página Principal -->
     <!-- Plugin: estilo para notificaciones -->
     <!-- end Estilo de Página Principal -->
+    <link href="assets\plugins\jvectormap-next\jquery-jvectormap.css" rel="stylesheet">
+    <link href="assets\plugins\bootstrap-datepicker\dist\css\bootstrap-datepicker.css" rel="stylesheet">
+    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+    <link href="~/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL STYLE ================== -->
 </head>
 <body>
 
@@ -155,7 +163,7 @@
                             </div>
                             <div class="info">
                                 <b class="caret pull-right"></b>
-                                 @obj.nombreUsuario @obj.apellidoUsuario
+                                @obj.nombreUsuario @obj.apellidoUsuario
                                 <small>
                                     @nombrerol
 
@@ -167,12 +175,12 @@
                         <ul class="nav nav-profile">
                             @if (Session["Menu"] != null)
                             {
-                                foreach (var lista in Model)
+                                foreach (var lista in menu)
                                 {
                                     if (lista.idacceso == 1)
                                     {
                                         <li>
-                                            <a href="javascript:;">
+                                            <a href="@Url.Action(lista.rutaAcceso, "Dashboard")">
                                                 <!--  <b class="caret"></b>-->
                                                 <i class="@lista.iconoAcceso"></i>
                                                 <span>@lista.nombreAcceso</span>
@@ -182,7 +190,7 @@
                                     if (lista.idacceso == 2)
                                     {
                                         <li>
-                                            <a href="javascript:;">
+                                            <a href="@Url.Action(lista.rutaAcceso, "Dashboard")">
                                                 <!--  <b class="caret"></b>-->
                                                 <i class="@lista.iconoAcceso"></i>
                                                 <span>@lista.nombreAcceso</span>
@@ -192,7 +200,7 @@
                                     if (lista.idacceso == 3)
                                     {
                                         <li>
-                                            <a href="javascript:;">
+                                            <a href="@Url.Action(lista.rutaAcceso, "Dashboard")">
                                                 <!--  <b class="caret"></b>-->
                                                 <i class="@lista.iconoAcceso"></i>
                                                 <span>@lista.nombreAcceso</span>
@@ -202,10 +210,10 @@
 
                                 }
                             }
-                            
+
                             @*<li><a href="javascript:;"><i class="fa fa-cog"></i> Settings</a></li>
-        <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Send Feedback</a></li>
-        <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>*@
+                            <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Send Feedback</a></li>
+                            <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>*@
                         </ul>
                     </li>
                 </ul>
@@ -214,19 +222,19 @@
                 <ul class="nav">
                     <li class="nav-header">Opciones</li>
                     <li class="active">
-                        <a href="home">
+                        <a href="@Url.Action("Principal", "Dashboard")">
                             <i class="fa fa-home fa-fw "></i>
                             <span class="f-s-13 f-w-700">Inicio</span>
                         </a>
                     </li>
                     @if (Session["Menu"] != null)
                     {
-                        foreach (var lista in Model)
+                        foreach (var lista in menu)
                         {
                             if (lista.idacceso != 1 && lista.idacceso != 2 && lista.idacceso != 3)
                             {
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="@Url.Action(lista.rutaAcceso, "Dashboard")">
                                         <!--  <b class="caret"></b>-->
                                         <i class="@lista.iconoAcceso"></i>
                                         <span>@lista.nombreAcceso</span>
@@ -238,21 +246,21 @@
 
 
                     <!--<li class="active">
-                    <a href="javascript:;">-->
+                <a href="javascript:;">-->
                     <!--  <b class="caret"></b>-->
                     <!--<i class="fa fa-th-large"></i>
-                            <span>Inicio</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="bootstrap_4.html">
-                            <div class="icon-img">
-                                <i class="fa fa-atlas"></i>-->
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="bootstrap_4.html">
+                        <div class="icon-img">
+                            <i class="fa fa-atlas"></i>-->
                     <!--<img src="..\assets\img\logo\logo-bs4.png" alt="">-->
                     <!--</div>
-                            <span>Bootstrap 4 <span class="label label-theme">NEW</span></span>
-                        </a>
-                    </li>-->
+                        <span>Bootstrap 4 <span class="label label-theme">NEW</span></span>
+                    </a>
+                </li>-->
 
                 </ul>
                 <!-- end sidebar nav -->
@@ -264,10 +272,10 @@
         @RenderBody()
 
 
-
         <!-- begin scroll to top btn : Boton que hace scroll hacia arriba-->
         <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
         <!-- end scroll to top btn -->
+
     </div>
     <!-- end page container -->
     <!-- begin Estilo Principal -->
@@ -278,5 +286,6 @@
     <script src="~/assets/plugins/gritter/js/jquery.gritter.js"></script>
     <script src="~/assets/js/demo/dashboard.js"></script>
     <!-- end Estilo de Pagina Principal -->
+  
 </body>
 </html>
