@@ -12,35 +12,24 @@ namespace Proyecto_SistemaIntranet.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class Curso
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
+        public Curso()
         {
-            this.Apoderado = new HashSet<Apoderado>();
-            this.Calificacion = new HashSet<Calificacion>();
             this.Carga_Academica = new HashSet<Carga_Academica>();
+            this.Evaluacion = new HashSet<Evaluacion>();
+            this.Horario = new HashSet<Horario>();
         }
     
-        public int idusuario { get; set; }
-        public string nombreUsuario { get; set; }
-        public string apellidoUsuario { get; set; }
-        public string dniUsuario { get; set; }
-        public System.DateTime fechaNacUsuario { get; set; }
-        public string direccionUsuario { get; set; }
-        public string telefonoUsuario { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public int idrol { get; set; }
-        public string rutaImagen { get; set; }
-        public string emailUsuario { get; set; }
+        public int idcurso { get; set; }
+        public string nombreCurso { get; set; }
     
-        public virtual Rol Rol { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Apoderado> Apoderado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Calificacion> Calificacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carga_Academica> Carga_Academica { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Evaluacion> Evaluacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Horario> Horario { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Proyecto_SistemaIntranet.Controllers
             if(objUsuario != null)
             {
                 //Buscamos los accesos que tiene el usuario
-                var menuUsuario = (from m in db.usp_user_acceso(objUsuario.idrol) select m);
+                var menuUsuario = (from m in db.usp_user_acceso(objUsuario.idrol, objUsuario.idusuario) select m);
                 //Nombre del Rol de Usuario
                 string nombreRol = (from r in db.Rol where r.idrol == objUsuario.idrol select r.descripcion).FirstOrDefault();
                 // ViewBag.menu = menuUsuario;

@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\SONY\Desktop\Sistema Intranet\Proyecto_SistemaIntranet\Models\ModeloIntranet.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\renat_2vk9jsv\source\repos\DSW1_Intranet_Colegio_Sigma\Models\ModeloIntranet.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

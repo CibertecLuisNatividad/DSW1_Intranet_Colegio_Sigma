@@ -13,6 +13,27 @@
         <AssociationConnector Association="SistemaIntranetModel.FK_Rol_has_Acceso_Acceso" ManuallyRouted="false" />
         <AssociationConnector Association="SistemaIntranetModel.FK_Rol_has_Acceso_Rol" ManuallyRouted="false" />
         <AssociationConnector Association="SistemaIntranetModel.FK_Usuario_Rol" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.Apoderado" Width="1.5" PointX="5.25" PointY="5.375" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.Calificacion" Width="1.5" PointX="12.875" PointY="7.5" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.Carga_Academica" Width="1.5" PointX="7.625" PointY="7.625" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.Curso" Width="1.5" PointX="5.375" PointY="9.375" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.Evaluacion" Width="1.5" PointX="10.625" PointY="8.5" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.Grado" Width="1.5" PointX="5.375" PointY="14.75" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.Horario" Width="1.5" PointX="7.625" PointY="10.875" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.Relacion" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.Seccion" Width="1.5" PointX="5.375" PointY="12.375" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.TipoEvaluacion" Width="1.5" PointX="8.375" PointY="4.625" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Apoderado_Relacion" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Apoderado_Usuario" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Calificacion_Evaluacion" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Calificacion_Usuario" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Carga_Academica_Curso" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Carga_Academica_Usuario" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Evaluacion_Curso" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Horario_Curso" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Evaluacion_TipoEvaluacion" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Horario_Grado" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Horario_Seccion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
