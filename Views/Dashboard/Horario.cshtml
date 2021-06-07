@@ -1,7 +1,22 @@
-﻿
+﻿@using Proyecto_SistemaIntranet.Models
+
 @{
     ViewBag.Title = "Horario";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+
+
+    List<Horario> horario = ViewBag.Horario;
+    //List<Carga_Academica> docxcurso = ViewBag.DocentexCurso;
+
+
+
+}
+
+@section css{
+    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+    <link href="~/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL STYLE ================== -->
 }
 
 <!-- begin #content -->
@@ -43,118 +58,80 @@
                 </thead>
                 <tbody>
                     <tr height="100px" class="text-center">
-                        <td width="15%" class="f-s-20 f-w-700 text-white bg-gradient-blue">07:00 - 8:00 am</td>
-                        <td class="text-white bg-gradient-aqua  f-s-15 f-w-400">
-                            Curso: Matematica <br />
-                            Seccion: E  <br />
-                            Docente: Mario Jimenez Gutierrez
+                        <td width="15%" class="f-s-20 f-w-700 text-white bg-gradient-blue">
+                            07:00 - 09:00 am
                         </td>
-                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
-                            Curso: Lenguaje <br />
-                            Seccion: C  <br />
-                            Docente: Julisa Romero Martinez
-                        </td>
-                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
-                            Curso: Historia <br />
-                            Seccion: B  <br />
-                            Docente: Martin Gomez Sandón
-                        </td>
-                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
-                            Curso: Física <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
-                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
-                            Curso: Algebra <br />
-                            Seccion: E  <br />
-                            Docente: Juan Alvarado Flor
-                        </td>
+                        @foreach (var lista in horario)
+                        {
+
+                            if (lista.horaInicio == 7 && lista.horaFin == 9)
+                            {
+
+                                <td class="text-white bg-gradient-aqua  f-s-15 f-w-400">
+                                    Curso: @lista.Curso.nombreCurso <br />
+                                    Seccion: @lista.Seccion.nombreSeccion  <br />
+                                   Horario: @lista.horaInicio:00 - @lista.horaFin:00
+                                </td>
+                            }
+
+                        }
+
                     </tr>
                     <tr height="100px" class="text-center">
-                        <td width="15%" class="f-s-20 f-w-700 text-center text-white bg-gradient-blue">08:00 - 9:00 am</td>
-                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
-                            Curso: Física <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
-                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
-                            Curso: Raz. Matemático <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
-                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
-                            Curso: Raz. Verbal <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
-                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
-                            Curso: Trigonometría <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
-                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
-                            Curso: Lenguaje <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
+                        <td width="15%" class="f-s-20 f-w-700 text-center text-white bg-gradient-blue">09:00 - 11:00 am</td>
+                        @foreach (var lista in horario)
+                        {
+
+                            if (lista.horaInicio == 9 && lista.horaFin == 11)
+                            {
+
+                                <td class="text-white bg-gradient-aqua  f-s-15 f-w-400">
+                                    Curso: @lista.Curso.nombreCurso <br />
+                                    Seccion: @lista.Seccion.nombreSeccion  <br />
+                                    Horario: @lista.horaInicio:00 - @lista.horaFin:00
+                                </td>
+                            }
+
+                        }
+                      
                     </tr>
                     <tr height="100px" class="text-center">
-                        <td width="15%" class="f-s-20 f-w-700 text-center text-white bg-gradient-blue">10:00 - 11:00 am</td>
-                        <td class="text-white bg-gradient-aqua  f-s-15 f-w-400">
-                            Curso: Matematica <br />
-                            Seccion: E  <br />
-                            Docente: Mario Jimenez Gutierrez
-                        </td>
-                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
-                            Curso: Lenguaje <br />
-                            Seccion: C  <br />
-                            Docente: Julisa Romero Martinez
-                        </td>
-                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
-                            Curso: Historia <br />
-                            Seccion: B  <br />
-                            Docente: Martin Gomez Sandón
-                        </td>
-                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
-                            Curso: Física <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
-                        <td class="text-white bg-gradient-aqua f-s-15 f-w-400">
-                            Curso: Algebra <br />
-                            Seccion: E  <br />
-                            Docente: Juan Alvarado Flor
-                        </td>
+                        <td width="15%" class="f-s-20 f-w-700 text-center text-white bg-gradient-blue">11:00 - 13:00 am</td>
+                        @foreach (var lista in horario)
+                        {
+
+                            if (lista.horaInicio == 11 && lista.horaFin == 13)
+                            {
+
+                                <td class="text-white bg-gradient-aqua  f-s-15 f-w-400">
+                                    Curso: @lista.Curso.nombreCurso <br />
+                                    Seccion: @lista.Seccion.nombreSeccion  <br />
+                                    Horario: @lista.horaInicio:00 - @lista.horaFin:00
+                                </td>
+                            }
+
+                        }
+                       
                     </tr>
                     <tr height="100px" class="text-center">
-                        <td width="15%" class="f-s-20 f-w-700 text-center text-white bg-gradient-blue">11:00 - 12:00 am</td>
-                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
-                            Curso: Física <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
-                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
-                            Curso: Raz. Matemático <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
-                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
-                            Curso: Raz. Verbal <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
-                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
-                            Curso: Trigonometría <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
-                        <td class="text-white bg-gradient-teal f-s-15 f-w-400">
-                            Curso: Lenguaje <br />
-                            Seccion: A  <br />
-                            Docente: Pablo Gomez Hurtado
-                        </td>
+                        <td width="15%" class="f-s-20 f-w-700 text-center text-white bg-gradient-blue">13:00 - 14:00 am</td>
+                        @foreach (var lista in horario)
+                        {
+
+                            if (lista.horaInicio == 13 && lista.horaFin == 14)
+                            {
+
+                                <td class="text-white bg-gradient-aqua  f-s-15 f-w-400">
+                                    Curso: @lista.Curso.nombreCurso <br />
+                                    Seccion: @lista.Seccion.nombreSeccion  <br />
+                                    Horario: @lista.horaInicio:00 - @lista.horaFin:00
+                                </td>
+                            }
+
+                        }
+                        
                     </tr>
-                    <tr height="100px" class="text-center">
+                    @*<tr height="100px" class="text-center">
                         <td width="15%" class="f-s-20 f-w-700 text-white bg-gradient-blue">12:00 - 13:00 pm</td>
                         <td class="text-white bg-gradient-aqua  f-s-15 f-w-400">
                             Curso: Matematica <br />
@@ -209,24 +186,8 @@
                             Seccion: A  <br />
                             Docente: Pablo Gomez Hurtado
                         </td>
-                    </tr>
-                    @*
-                    <tr height="100px" class="table-info">
-                        <td width="15%"    class="f-s-600 text-inverse">11:00 12:00</td>
-                        <td>Matematica -Seccion E <a href="#">Docente</a>dsdsdsdsdsds</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td>X</td>
-                    </tr>
-                    <tr height="100px" >
-                        <td width="15%"   class="f-s-600 text-inverse">12:00 13:00</td>
-                        <td>Matematica -Seccion E <a href="#">Docente</a>dsdsdsdsdsds</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td>X</td>
                     </tr>*@
+
 
                 </tbody>
             </table>

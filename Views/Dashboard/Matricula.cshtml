@@ -1,0 +1,428 @@
+﻿
+@{
+    ViewBag.Title = "Matricula";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+@section css{
+
+    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+    <link href="~/assets/plugins/smartwizard/dist/css/smart_wizard.css" rel="stylesheet">
+    <link href="~/assets/css/mystyle.css" rel="stylesheet">
+    <!-- ================== END PAGE LEVEL STYLE ================== -->
+}
+
+<!-- begin #content -->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+        <li class="breadcrumb-item active">Matrícula</li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+
+    <h1 class="page-header">Matrícula <small> Alumnos  </small></h1>
+    <!-- end page-header -->
+    <!-- begin wizard-form -->
+    @using (Html.BeginForm("Matricula", "Dashboard", FormMethod.Post, new { @class = "form-control-with-bg" }))
+    {
+
+        <!-- begin wizard -->
+        <div id="wizard">
+            <!-- begin wizard-step -->
+            <ul>
+                <li>
+                    <a href="#step-1">
+                        <span class="number">1</span>
+                        <span class="info">
+                            Estudiante
+                            <small>Información Personal</small>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#step-2">
+                        <span class="number">2</span>
+                        <span class="info">
+                            Apoderado
+                            <small>Información Personal</small>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#step-3">
+                        <span class="number">3</span>
+                        <span class="info">
+                            Ciclo Académico
+                            <small>Grado / Sección</small>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#step-4">
+                        <span class="number">4</span>
+                        <span class="info">
+                            Completado
+                            <small>Finalizar Matrícula</small>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <!-- end wizard-step -->
+            <!-- begin wizard-content -->
+            <div>
+                <!-- begin step-1 -->
+                <div id="step-1">
+                    <!-- begin fieldset -->
+                    <fieldset>
+                        @if (ViewBag.Mensaje != null)
+                        {
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>@ViewBag.Mensaje</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        }
+                        <legend class="f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-center">Información Personal del Alumno</legend>
+                        <!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><b>Foto de Perfil</b></label>
+                                    <input type="hidden" id="urlImagen" name="rutaImagen">
+                                    <div class="image-upload">
+                                        <div id="preview">
+                                            <img src="#" alt="" id="imgperfil" style="display:block">
+                                            <progress max="100" value="0" class="" id="progress">0%</progress>
+                                        </div>
+
+                                        <label for="file-input" class="btn btn-primary lb-img">
+                                            <!-- <img src="../assets/img/logo/upload.png" alt=""> -->
+                                            <i class="fa fa-cloud-upload-alt"></i> Añadir Foto
+                                        </label>
+
+                                        <input id="file-input" type="file" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Nombres</b></label>
+                                                <input type="text" class="form-control" id="IdNombre" name="nombreUsuario" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Apellidos</b></label>
+                                                <input type="text" class="form-control" id="IdApellido" name="apellidoUsuario" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Dirección</b></label>
+                                                <input type="text" class="form-control" id="IdDireccion" name="direccionUsuario" required>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label><b>Fecha de Nacimiento</b></label>
+                                                <input type="date" class="form-control" name="fechaNacUsuario" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Usuario</b></label>
+                                                <input type="text" class="form-control" id="IdUsuario" name="username" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Teléfono</b></label>
+                                                <input type="text" class="form-control" id="IdTelefono" name="telefonoUsuario" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>DNI</b></label>
+                                                <input type="text" class="form-control" id="IdDNI" name="dniUsuario" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Email</b></label>
+                                                <input type="email" class="form-control" id="IdEmail" placeholder="" name="emailUsuario" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>Estado</b></label>
+                                                <select class="form-control" name="estado" required>
+                                                    <option value=" ">[Seleccione]</option>
+                                                    <option value="Activo">Activo</option>
+                                                    <option value="Inactivo">Inactivo</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>Contraseña</b></label>
+                                                <input data-toggle="password" data-placement="after" type="password" class="form-control" id="idPassword" name="password" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="col-md-12 text-center">
+                <button type="submit" id="Guardar" class="btn btn-lg btn-blue m-r-30">Registrar Usuario</button>
+                <button type="button" id="Cancelar" class="btn btn-lg btn-muted" data-dismiss="modal" onclick="CancelarRegistro()">Cancelar</button>
+            </div>*@
+                        </div>
+                        <!-- end row -->
+                    </fieldset>
+                    <!-- end fieldset -->
+                </div>
+                <!-- end step-1 -->
+                <!-- begin step-2 -->
+                <div id="step-2">
+                    <!-- begin fieldset -->
+                    <fieldset>
+                        <legend class="f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-center">Información Personal del Apoderado</legend>
+                        <!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Nombres</b></label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="nombreApoderado" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Apellidos</b></label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="apellidoApoderado" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Dirección</b></label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="direccionApoderado" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Email</b></label>
+                                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="" name="emailApoderado" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label><b>Tipo de Apoderado</b></label>
+                                                @Html.DropDownList("idrelacion", null, htmlAttributes: new { @class = "form-control" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Teléfono</b></label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="telefonoApoderado" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>DNI</b></label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="dniApoderado" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><b>Profesión</b></label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" name="profesionApoderado" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                    </fieldset>
+                    <!-- end fieldset -->
+                </div>
+                <!-- end step-2 -->
+                <!-- begin step-3 -->
+                <div id="step-3">
+                    <!-- begin fieldset -->
+                    <fieldset>
+                        <legend class="f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-center">Grado Académico del Alumno</legend>
+                        <!-- begin row -->
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+                                <div class="container">
+                                    <div class="row ">
+
+                                        <div class="form-group  m-r-35">
+                                            <label><b>Grado</b></label>
+                                            @Html.DropDownList("idgrado", null, htmlAttributes: new { @class = "form-control" })
+                                        </div>
+                                        <div class="form-group  m-r-35">
+                                            <label><b>Sección</b></label>
+                                            @Html.DropDownList("idseccion", null, htmlAttributes: new { @class = "form-control" })
+                                        </div>
+                                        <div class="form-group m-r-35">
+                                            <label><b>Total de Vacantes </b></label>
+                                            <input type="text" class="form-control" id="vacantesT" name="vacante_total" readonly>
+                                        </div>
+                                        <div class="form-group m-r-35">
+                                            <label><b>Vacantes Disponibles </b></label>
+                                            <input type="text" class="form-control" id="vacantesD" name="vacante_disponible" readonly>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-capitalize text-center">
+                                <label id="texto_vacante"><b></b></label>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                    </fieldset>
+                    <!-- end fieldset -->
+                </div>
+                <!-- end step-3 -->
+                <!-- begin step-4 -->
+                <div id="step-4">
+                    <div class="jumbotron m-b-0 text-center">
+                        <h2 class="display-4">¿Desea Completar la Matrícula?</h2>
+                        <p class="lead mb-4">Recuerde verificar que todos los campos de los formularios<br>Estén correctamente llenados </p>
+                        <p>
+                            @*<a href="javascript:;" class="btn btn-primary btn-lg">Matricular Alumno</a>*@
+                            <input type="submit" value="Matricular Alumno" class="btn btn-primary btn-lg" />
+                        </p>
+                    </div>
+                </div>
+                <!-- end step-4 -->
+            </div>
+            <!-- end wizard-content -->
+        </div>
+        <!-- end wizard -->
+
+    }
+    <!-- end wizard-form -->
+</div>
+
+
+@section scripts{
+
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="~/assets/plugins/smartwizard/dist/js/jquery.smartWizard.js"></script>
+    <script src="~/assets/js/demo/form-wizards.demo.js"></script>
+    <script src="~/assets/plugins/bootstrap-show-password/dist/bootstrap-show-password.js"></script>
+
+    <script src="~/assets/js/mycode.js"></script>
+
+    <!-- ================== END PAGE LEVEL JS ================== -->
+    <!-- ==================BEGIN SCRIPT DE FIREBASE==============-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <!-- Firebase Script for Storage-->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyAp6s1Kr6ibTk_damqPN5Kuw68PJYpGS_s",
+            authDomain: "proyecto-dsw1.firebaseapp.com",
+            projectId: "proyecto-dsw1",
+            storageBucket: "proyecto-dsw1.appspot.com",
+            messagingSenderId: "681444114284",
+            appId: "1:681444114284:web:9969f704673b921f66bd49",
+            measurementId: "G-PR6KHW7GL5"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#imgperfil').attr('src', 'https://img.icons8.com/bubbles/500/000000/upload.png');
+            $("#texto_vacante").text("");
+
+            inicializar();
+        });
+
+        var fichero;
+        var progressBar;
+        var url_imagen;
+        var storageRef;
+
+        //1) Inicializamos el Firebase
+        function inicializar() {
+            //Obtenemos el fichero del input file de nuestra imagen
+            fichero = document.getElementById("file-input");
+            //Obtenemos el ProgressBar
+            progressBar = document.getElementById("progress");
+            //Referenciamos el Storage
+            storageRef = firebase.storage().ref();
+            //Cuando cargamos una imagen en el fichero se ejecutará automaticamente la funcion
+            //subirImagenAFirebase()
+            fichero.addEventListener('change', subirImagenAFirebase, false);
+
+        }
+
+        //2)Función que permite subir la Imagen en Firebase Storage
+        function subirImagenAFirebase() {
+            var imagenASubir = fichero.files[0];
+            var uploadTask = storageRef.child('usuarios/' + imagenASubir.name).put(imagenASubir);
+
+            uploadTask.on('state_changed',
+
+                function progress(snapshot) {
+                    var porcentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    progressBar.value = porcentaje;
+                },
+                function (error) {
+                    alert("Hubo un error: " + error);
+                },
+                function () {
+                    storageRef.child('usuarios/' + imagenASubir.name).getDownloadURL().then(function (url) {
+
+                        $("#urlImagen").val(url);
+                        console.log(url);
+
+                    }).catch(function (error) {
+                        console.log("Ocurrio un error: " + error);
+                    });
+
+                });
+
+        }
+
+
+
+    </script>
+    <!-- ==================END SCRIPT DE FIREBASE ==============-->
+    <!-- ==================BEGIN SCRIPT CARGA GRADO/SECCION JSON==============-->
+  
+    <script type="text/javascript">
+         $("#idseccion").change(function () {
+             var gradoID = $("#idgrado").val();
+             var seccionID = $("#idseccion").val();
+
+             $.getJSON("@Url.Action("getVacantes", "Dashboard")", { idgrado: gradoID, idseccion: seccionID }, function (data) {
+
+                 if (data.vacante_disponible > 0) {
+                     $("#vacantesT").val(data.vacante_total);
+                     $("#vacantesD").val(data.vacante_disponible);
+                     $("#texto_vacante").text("Existen Vacantes Disponibles. Continue con la Matrícula");
+                     $("#texto_vacante").css("color", "green");
+                     $("#texto_vacante").css("font-size", "25px");
+                 } else {
+                     $("#vacantesT").val(data.vacante_total);
+                     $("#vacantesD").val(data.vacante_disponible);
+                     $("#texto_vacante").text("No Existen Vacantes Disponibles. Seleccione otra Sección");
+                     $("#texto_vacante").css("color", "red");
+                     $("#texto_vacante").css("font-size", "25px");
+                     $("#wizard").smartWizard({
+                         selected: 0,
+                         useURLhash: false,
+                         showStepURLhash: false,
+                         toolbarSettings: {
+                             showNextButton: false,
+                             showPreviousButton: true
+                         }
+                     });
+                 }
+
+               
+               
+             });
+                
+
+         });
+    </script>
+    <!-- ==================END SCRIPT CARGA GRADO/SECCION AJAX==============-->
+}

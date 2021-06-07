@@ -31,10 +31,12 @@ namespace Proyecto_SistemaIntranet.Models
         public string estadoEvaluacion { get; set; }
         public int idcurso { get; set; }
         public int idtipo { get; set; }
+        public int idgrado_seccion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Calificacion> Calificacion { get; set; }
         public virtual Curso Curso { get; set; }
         public virtual TipoEvaluacion TipoEvaluacion { get; set; }
+        public virtual Grado_Has_Seccion Grado_Has_Seccion { get; set; }
     }
 }

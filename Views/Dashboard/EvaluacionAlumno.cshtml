@@ -1,0 +1,105 @@
+﻿@using Proyecto_SistemaIntranet.Models
+@{
+    ViewBag.Title = "Evaluacion";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    Usuario obj = (Usuario)Session["Usuario"];
+
+    List<Evaluacion> ev = ViewBag.Evaluacion;
+
+}
+
+@section css{
+    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+    <link href="~/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL STYLE ================== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" />
+
+}
+
+
+
+<!-- begin #content -->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Inicio</a></li>
+        <li class="breadcrumb-item active">Evaluación</li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <h1 class="page-header"><b>Evaluaciones Escolares</b></h1>
+    <!-- end page-header -->
+    <!-- TABLA DE USUARIOS  -->
+    <!-- begin panel -->
+    <div class="panel panel-inverse">
+        <!-- begin panel-heading -->
+        <div class="panel-heading bg-blue-darker">
+        </div>
+
+        <!-- end panel-heading -->
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>@ViewBag.Error</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        <div class="panel-body">
+            <table id="data-table-default" class="table table-striped table-bordered table-td-valign-middle">
+                <thead>
+                    <tr>
+                        <th width="1%" class="all">Codigo</th>
+                        <th width="20%" class="all text-nowrap">Evaluación</th>
+                        <th width="30%" class="all text-nowrap">Descripción</th>
+                        <th width="20%" class="all text-nowrap">Fecha Inicio</th>
+                        <th width="10%" class="all text-nowrap">Fecha Entrega</th>
+                        <th width="10%" class="all text-nowrap">Estado</th>
+                        <th width="9%" class="all text-nowrap">Detalle</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lista in ev)
+                    {
+                        <tr class="odd gradeX">
+                            <td width="1%" class="text-inverse">@lista.idevaluacion</td>
+                            <td width="10%">@lista.TipoEvaluacion.nombreTipo</td>
+                            <td width="20%">@lista.tituloEvaluacion</td>
+                            <td width="30%">@lista.fechaInicio @lista.horaInicio:00</td>
+                            <td width="20%">@lista.fechaFin @lista.horaFin:00</td>
+                            <td width="10%">@lista.estadoEvaluacion</td>
+                            <td width="9%" class="inline-block text-center">
+                                <a href="@Url.Action( "DetalleEvaluacion", "Dashboard",new { id = lista.idevaluacion })" class="btn btn-warning m-b-2" id="btnDetalle"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+        <!-- end panel-body -->
+    </div>
+    <!-- end panel -->
+    <!-- TERMINA TABLA DE USUARIOS  -->
+</div>
+<!-- end #content -->
+
+@section scripts{
+
+    <script src="~/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/assets/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/assets/js/demo/table-manage-default.demo.js"></script>
+
+    <script src="~/assets/js/demo/form-plugins.demo.js"></script>
+    <script src="~/assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/assets/js/demo/ui-modal-notification.demo.js"></script>
+    <script src="~/assets/js/mycode.js"></script>
+
+}

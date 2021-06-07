@@ -34,6 +34,13 @@
         <AssociationConnector Association="SistemaIntranetModel.FK_Evaluacion_TipoEvaluacion" />
         <AssociationConnector Association="SistemaIntranetModel.FK_Horario_Grado" />
         <AssociationConnector Association="SistemaIntranetModel.FK_Horario_Seccion" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.Grado_Has_Seccion" Width="1.5" PointX="10.625" PointY="12.75" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Grado_Has_Seccion_Grado" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Grado_Has_Seccion_Seccion" />
+        <EntityTypeShape EntityType="SistemaIntranetModel.Matricula" Width="1.5" PointX="12.875" PointY="12.625" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Matricula_Grado_Has_Seccion" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Matricula_Usuario" />
+        <AssociationConnector Association="SistemaIntranetModel.FK_Evaluacion_Grado_Has_Seccion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

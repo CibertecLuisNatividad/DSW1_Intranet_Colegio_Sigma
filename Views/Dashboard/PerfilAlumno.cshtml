@@ -7,6 +7,13 @@
     Apoderado ap = (Apoderado)Session["Apoderado"];
 }
 
+@section css{
+
+    @*<link href="assets\plugins\jvectormap-next\jquery-jvectormap.css" rel="stylesheet">*@
+    <link href="~/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet">
+
+}
+
 <!-- begin #content -->
 <div id="content" class="content">
     <!-- begin breadcrumb -->
@@ -28,7 +35,7 @@
             <div class="text-center card border-0">
                 <!-- ..\assets\img\user\user-13.jpeg -->
                 <!-- ..\assets\img\gallery\gallery-1.jpeg -->
-                <img class="card-img-top height-300" src=" @obj.rutaImagen " alt="" >
+                <img class="card-img-top height-300" src=" @obj.rutaImagen " alt="">
                 <div class="card-body">
                     <h2 class="card-title m-t-0 m-b-10">@nombrerol </h2>
                     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
@@ -107,9 +114,9 @@
                                 <div class="col-md-4">
                                     @*<div class="form-group">
 
-                                    <label for="exampleInputEmail1"><b>Código</b></label>
-                                    <input type="text" class="form-control" id="idCodigo" readonly value="@obj.idusuario" name="codigo">
-                                </div>*@
+                                            <label for="exampleInputEmail1"><b>Código</b></label>
+                                            <input type="text" class="form-control" id="idCodigo" readonly value="@obj.idusuario" name="codigo">
+                                        </div>*@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"><b>Nombres</b></label>
                                         <input type="text" class="form-control" id="idNombre" disabled value="@obj.nombreUsuario" name="nombre">
@@ -141,31 +148,31 @@
                                         <input type="text" class="form-control" id="idApellido" disabled value="@obj.telefonoUsuario" name="apellido">
                                     </div>
                                     @*<div class="form-group">
-                                    <label for="exampleInputEmail1"><b>Email</b></label>
-                                    <input type="email" class="form-control" id="idEmail" disabled value="" name="email">
-                                </div>*@
+                                            <label for="exampleInputEmail1"><b>Email</b></label>
+                                            <input type="email" class="form-control" id="idEmail" disabled value="" name="email">
+                                        </div>*@
                                     @*<div class="form-group">
-                                    <label><b>Sexo</b></label>
-                                    <select class="form-control" id="idSexo" disabled name="sexo">
-                                        <option>[Seleccione]</option>
-                                        <option value="Masculino">Masculino</option>
-                                        <option value="Femenino">Femenino</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label><b>Estado</b></label>
-                                    <select class="form-control" id="idEstado" disabled>
-                                        <option>[Seleccione</option>
-                                    </select>
-                                </div>*@
+                                            <label><b>Sexo</b></label>
+                                            <select class="form-control" id="idSexo" disabled name="sexo">
+                                                <option>[Seleccione]</option>
+                                                <option value="Masculino">Masculino</option>
+                                                <option value="Femenino">Femenino</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><b>Estado</b></label>
+                                            <select class="form-control" id="idEstado" disabled>
+                                                <option>[Seleccione</option>
+                                            </select>
+                                        </div>*@
 
                                 </div>
                                 @*<div class="col-md-12">
 
-                                    <button type="button" id="Actualiza" class="btn btn-lg btn-warning  m-r-5 " onclick="do_change()">Actualizar Perfil</button>
-                                    <button type="submit" id="Guardar" class="btn btn-lg btn-success m-r-5" style="display:none;">Guardar Cambios</button>
-                                    <button type="button" id="Cancelar" class="btn btn-lg btn-dark" style="display:none;" onclick="do_back()">Cancelar</button>
-                                </div>*@
+                                        <button type="button" id="Actualiza" class="btn btn-lg btn-warning  m-r-5 " onclick="do_change()">Actualizar Perfil</button>
+                                        <button type="submit" id="Guardar" class="btn btn-lg btn-success m-r-5" style="display:none;">Guardar Cambios</button>
+                                        <button type="button" id="Cancelar" class="btn btn-lg btn-dark" style="display:none;" onclick="do_back()">Cancelar</button>
+                                    </div>*@
                             </div>
                         </div>
                     </form>
@@ -181,12 +188,12 @@
                     <h4 class="panel-title">Datos del Apoderado(a)</h4>
                 </div>
                 <!-- end panel-heading -->
-                <!-- begin panel-body -->          
+                <!-- begin panel-body -->
                 <div class="panel-body">
                     <form action="ServletUsuario?accion=ACTUALIZAR_PERFIL" method="POST">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-4">                                 
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"><b>Nombres</b></label>
                                         <input type="text" class="form-control" id="idNombre" disabled value="@ap.nombreApoderado" name="nombre">
@@ -195,7 +202,7 @@
                                         <label for="exampleInputEmail1"><b>Dirección</b></label>
                                         <input type="text" class="form-control" id="idApellido" disabled value="@ap.direccionApoderado" name="apellido">
                                     </div>
-                                 
+
 
                                 </div>
                                 <div class="col-md-4">
@@ -207,15 +214,15 @@
                                         <label><b>Profesión </b></label>
                                         <input type="text" class="form-control" id="fechaNac" name="fechanacimiento" disabled value="Ingeniero">
                                     </div>
-                                   
+
                                     <div class="form-group">
                                         <label><b>Relación</b></label>
-                                        @Html.DropDownList("idRelacion",null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.DropDownList("idRelacion", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
                                         @*<select class="form-control" id="idSexo" disabled name="sexo">
-                                            <option>[Seleccione]</option>
-                                            <option value="1" selected>Padre</option>
-                                            <option value="2">Madre</option>
-                                        </select>*@
+                                                <option>[Seleccione]</option>
+                                                <option value="1" selected>Padre</option>
+                                                <option value="2">Madre</option>
+                                            </select>*@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -227,24 +234,24 @@
                                         <label for="exampleInputEmail1"><b>Teléfono</b></label>
                                         <input type="text" class="form-control" id="idApellido" disabled value="@ap.telefonoApoderado" name="apellido">
                                     </div>
-   
+
                                     @*<div class="form-group">
-                                    <label><b>Sexo</b></label>
-                                    <select class="form-control" id="idSexo" disabled name="sexo">
-                                        <option>[Seleccione]</option>
-                                        <option value="Masculino">Masculino</option>
-                                        <option value="Femenino">Femenino</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label><b>Estado</b></label>
-                                    <select class="form-control" id="idEstado" disabled>
-                                        <option>[Seleccione</option>
-                                    </select>
-                                </div>*@
+                                            <label><b>Sexo</b></label>
+                                            <select class="form-control" id="idSexo" disabled name="sexo">
+                                                <option>[Seleccione]</option>
+                                                <option value="Masculino">Masculino</option>
+                                                <option value="Femenino">Femenino</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><b>Estado</b></label>
+                                            <select class="form-control" id="idEstado" disabled>
+                                                <option>[Seleccione</option>
+                                            </select>
+                                        </div>*@
 
                                 </div>
-                              
+
                             </div>
                         </div>
                     </form>
@@ -263,51 +270,57 @@
 </div>
 <!-- end #content -->
 
-<script type="text/javascript">
-    $(document).ready(function () {
 
 
-        setTimeout(function () {
-            $("#alerta").alert('close');
-        }, 3000);
-    });
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#alerta").alert('close');
+            }, 3000);
+        });
+    </script>
 
 
-</script>
-<!--Script para ocultar botones de perfil-->
-<script type="text/javascript">
-    function do_change() {
-        //Acciones para Los Botones
-        document.getElementById("Actualiza").style.display = "none";
-        document.getElementById("Guardar").style.display = "inline-block";
-        document.getElementById("Cancelar").style.display = "inline-block";
-        //Acciones para deshabilitar el disabled en las cajas de texto
-        document.getElementById("idNombre").disabled = false;
-        document.getElementById("idApellido").disabled = false;
-        document.getElementById("fechaNac").disabled = false;
-        document.getElementById("idEmail").disabled = false;
-        //document.getElementById("cargoid").disabled=true;
-        document.getElementById("idSexo").disabled = false;
-        //document.getElementById("idEstado").disabled=false;
-    }
+    <!--Script para ocultar botones de perfil-->
+    <script type="text/javascript">
+        function do_change() {
+            //Acciones para Los Botones
+            document.getElementById("Actualiza").style.display = "none";
+            document.getElementById("Guardar").style.display = "inline-block";
+            document.getElementById("Cancelar").style.display = "inline-block";
+            //Acciones para deshabilitar el disabled en las cajas de texto
+            document.getElementById("idNombre").disabled = false;
+            document.getElementById("idApellido").disabled = false;
+            document.getElementById("fechaNac").disabled = false;
+            document.getElementById("idEmail").disabled = false;
+            //document.getElementById("cargoid").disabled=true;
+            document.getElementById("idSexo").disabled = false;
+            //document.getElementById("idEstado").disabled=false;
+        }
 
-    function do_back() {
-        //Acciones para Los Botones
-        document.getElementById("Actualiza").style.display = "block";
-        document.getElementById("Guardar").style.display = "none";
-        document.getElementById("Cancelar").style.display = "none";
-        //Acciones para habilitar el disabled en las cajas de texto
-        document.getElementById("idNombre").disabled = true;
-        document.getElementById("idApellido").disabled = true;
-        document.getElementById("fechaNac").disabled = true;
-        document.getElementById("idEmail").disabled = true;
-        //document.getElementById("cargoid").disabled=true;
-        document.getElementById("idSexo").disabled = true;
-        document.getElementById("idEstado").disabled = true;
-    }
-</script>
-<script src="assets\plugins\jquery-sparkline\jquery.sparkline.min.js"></script>
-<script src="assets\plugins\bootstrap-datepicker\dist\js\bootstrap-datepicker.js"></script>
-<script src="assets\plugins\bootstrap-timepicker\js\bootstrap-timepicker.min.js"></script>
-<script src="assets\plugins\bootstrap-show-password\dist\bootstrap-show-password.js"></script>
-<script src="assets\js\demo\form-plugins.demo.js"></script>
+        function do_back() {
+            //Acciones para Los Botones
+            document.getElementById("Actualiza").style.display = "block";
+            document.getElementById("Guardar").style.display = "none";
+            document.getElementById("Cancelar").style.display = "none";
+            //Acciones para habilitar el disabled en las cajas de texto
+            document.getElementById("idNombre").disabled = true;
+            document.getElementById("idApellido").disabled = true;
+            document.getElementById("fechaNac").disabled = true;
+            document.getElementById("idEmail").disabled = true;
+            //document.getElementById("cargoid").disabled=true;
+            document.getElementById("idSexo").disabled = true;
+            document.getElementById("idEstado").disabled = true;
+        }
+    </script>
+
+    @*<script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>*@
+    <script src="~/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="~/assets/plugins/bootstrap-show-password/dist/bootstrap-show-password.js"></script>
+    <script src="~/assets/js/demo/form-plugins.demo.js"></script>
+
+
+}

@@ -42,6 +42,8 @@ namespace Proyecto_SistemaIntranet.Models
         public virtual DbSet<Relacion> Relacion { get; set; }
         public virtual DbSet<Seccion> Seccion { get; set; }
         public virtual DbSet<TipoEvaluacion> TipoEvaluacion { get; set; }
+        public virtual DbSet<Grado_Has_Seccion> Grado_Has_Seccion { get; set; }
+        public virtual DbSet<Matricula> Matricula { get; set; }
     
         public virtual ObjectResult<string> usp_Usuario_Acceso(Nullable<int> idrol)
         {

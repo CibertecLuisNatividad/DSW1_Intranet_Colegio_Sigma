@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="idacceso" />
           </Key>
-          <Property Name="idacceso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idacceso" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nombreAcceso" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="rutaAcceso" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="iconoAcceso" Type="varchar" MaxLength="30" />
@@ -23,6 +23,7 @@
           <Property Name="nombreApoderado" Type="varchar" MaxLength="50" />
           <Property Name="apellidoApoderado" Type="varchar" MaxLength="50" />
           <Property Name="dniApoderado" Type="varchar" MaxLength="8" />
+          <Property Name="emailApoderado" Type="varchar" MaxLength="50" />
           <Property Name="direccionApoderado" Type="varchar" MaxLength="150" />
           <Property Name="profesionApoderado" Type="varchar" MaxLength="150" />
           <Property Name="telefonoApoderado" Type="varchar" MaxLength="9" />
@@ -55,7 +56,7 @@
           <Key>
             <PropertyRef Name="idcurso" />
           </Key>
-          <Property Name="idcurso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idcurso" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nombreCurso" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="Evaluacion">
@@ -73,6 +74,7 @@
           <Property Name="estadoEvaluacion" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="idcurso" Type="int" Nullable="false" />
           <Property Name="idtipo" Type="int" Nullable="false" />
+          <Property Name="idgrado_seccion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Grado">
           <Key>
@@ -80,6 +82,16 @@
           </Key>
           <Property Name="idgrado" Type="int" Nullable="false" />
           <Property Name="nombreGrado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grado_Has_Seccion">
+          <Key>
+            <PropertyRef Name="idgrado_seccion" />
+          </Key>
+          <Property Name="idgrado_seccion" Type="int" Nullable="false" />
+          <Property Name="idgrado" Type="int" Nullable="false" />
+          <Property Name="idseccion" Type="int" Nullable="false" />
+          <Property Name="vacante_total" Type="int" />
+          <Property Name="vacante_disponible" Type="int" />
         </EntityType>
         <EntityType Name="Horario">
           <Key>
@@ -92,6 +104,14 @@
           <Property Name="idseccion" Type="int" Nullable="false" />
           <Property Name="idgrado" Type="int" Nullable="false" />
           <Property Name="idcurso" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Matricula">
+          <Key>
+            <PropertyRef Name="idmatricula" />
+          </Key>
+          <Property Name="idmatricula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idgrado_seccion" Type="int" Nullable="false" />
+          <Property Name="idusuario" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Relacion">
           <Key>
@@ -155,6 +175,7 @@
           <Property Name="idrol" Type="int" Nullable="false" />
           <Property Name="rutaImagen" Type="varchar" MaxLength="500" />
           <Property Name="emailUsuario" Type="varchar" MaxLength="100" />
+          <Property Name="estado" Type="varchar" MaxLength="10" />
         </EntityType>
         <Association Name="FK_Apoderado_Relacion">
           <End Role="Relacion" Type="Self.Relacion" Multiplicity="1" />
@@ -240,6 +261,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Evaluacion_Grado_Has_Seccion">
+          <End Role="Grado_Has_Seccion" Type="Self.Grado_Has_Seccion" Multiplicity="1" />
+          <End Role="Evaluacion" Type="Self.Evaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado_Has_Seccion">
+              <PropertyRef Name="idgrado_seccion" />
+            </Principal>
+            <Dependent Role="Evaluacion">
+              <PropertyRef Name="idgrado_seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Evaluacion_TipoEvaluacion">
           <End Role="TipoEvaluacion" Type="Self.TipoEvaluacion" Multiplicity="1" />
           <End Role="Evaluacion" Type="Self.Evaluacion" Multiplicity="*" />
@@ -249,6 +282,30 @@
             </Principal>
             <Dependent Role="Evaluacion">
               <PropertyRef Name="idtipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grado_Has_Seccion_Grado">
+          <End Role="Grado" Type="Self.Grado" Multiplicity="1" />
+          <End Role="Grado_Has_Seccion" Type="Self.Grado_Has_Seccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado">
+              <PropertyRef Name="idgrado" />
+            </Principal>
+            <Dependent Role="Grado_Has_Seccion">
+              <PropertyRef Name="idgrado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grado_Has_Seccion_Seccion">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="1" />
+          <End Role="Grado_Has_Seccion" Type="Self.Grado_Has_Seccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="idseccion" />
+            </Principal>
+            <Dependent Role="Grado_Has_Seccion">
+              <PropertyRef Name="idseccion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -285,6 +342,30 @@
             </Principal>
             <Dependent Role="Horario">
               <PropertyRef Name="idseccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Grado_Has_Seccion">
+          <End Role="Grado_Has_Seccion" Type="Self.Grado_Has_Seccion" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado_Has_Seccion">
+              <PropertyRef Name="idgrado_seccion" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="idgrado_seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="idusuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -370,7 +451,9 @@
           <EntitySet Name="Curso" EntityType="Self.Curso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Evaluacion" EntityType="Self.Evaluacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grado" EntityType="Self.Grado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grado_Has_Seccion" EntityType="Self.Grado_Has_Seccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Horario" EntityType="Self.Horario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matricula" EntityType="Self.Matricula" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Relacion" EntityType="Self.Relacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol_has_Acceso" EntityType="Self.Rol_has_Acceso" Schema="dbo" store:Type="Tables" />
@@ -406,9 +489,21 @@
             <End Role="Curso" EntitySet="Curso" />
             <End Role="Evaluacion" EntitySet="Evaluacion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Evaluacion_Grado_Has_Seccion" Association="Self.FK_Evaluacion_Grado_Has_Seccion">
+            <End Role="Grado_Has_Seccion" EntitySet="Grado_Has_Seccion" />
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Evaluacion_TipoEvaluacion" Association="Self.FK_Evaluacion_TipoEvaluacion">
             <End Role="TipoEvaluacion" EntitySet="TipoEvaluacion" />
             <End Role="Evaluacion" EntitySet="Evaluacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grado_Has_Seccion_Grado" Association="Self.FK_Grado_Has_Seccion_Grado">
+            <End Role="Grado" EntitySet="Grado" />
+            <End Role="Grado_Has_Seccion" EntitySet="Grado_Has_Seccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grado_Has_Seccion_Seccion" Association="Self.FK_Grado_Has_Seccion_Seccion">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="Grado_Has_Seccion" EntitySet="Grado_Has_Seccion" />
           </AssociationSet>
           <AssociationSet Name="FK_Horario_Curso" Association="Self.FK_Horario_Curso">
             <End Role="Curso" EntitySet="Curso" />
@@ -421,6 +516,14 @@
           <AssociationSet Name="FK_Horario_Seccion" Association="Self.FK_Horario_Seccion">
             <End Role="Seccion" EntitySet="Seccion" />
             <End Role="Horario" EntitySet="Horario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Grado_Has_Seccion" Association="Self.FK_Matricula_Grado_Has_Seccion">
+            <End Role="Grado_Has_Seccion" EntitySet="Grado_Has_Seccion" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Usuario" Association="Self.FK_Matricula_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Matricula" EntitySet="Matricula" />
           </AssociationSet>
           <AssociationSet Name="FK_Rol_has_Acceso_Acceso" Association="Self.FK_Rol_has_Acceso_Acceso">
             <End Role="Acceso" EntitySet="Acceso" />
@@ -499,6 +602,8 @@
           <NavigationProperty Name="Calificacion" Relationship="SistemaIntranetModel.FK_Calificacion_Usuario" FromRole="Usuario" ToRole="Calificacion" />
           <NavigationProperty Name="Carga_Academica" Relationship="SistemaIntranetModel.FK_Carga_Academica_Usuario" FromRole="Usuario" ToRole="Carga_Academica" />
           <Property Name="emailUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Matricula" Relationship="SistemaIntranetModel.FK_Matricula_Usuario" FromRole="Usuario" ToRole="Matricula" />
         </EntityType>
         <Association Name="FK_Rol_has_Acceso_Acceso">
           <End Role="Acceso" Type="Self.Acceso" Multiplicity="1" />
@@ -645,6 +750,28 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Grado_Has_Seccion" EntityType="SistemaIntranetModel.Grado_Has_Seccion" />
+          <AssociationSet Name="FK_Grado_Has_Seccion_Grado" Association="SistemaIntranetModel.FK_Grado_Has_Seccion_Grado">
+            <End Role="Grado" EntitySet="Grado" />
+            <End Role="Grado_Has_Seccion" EntitySet="Grado_Has_Seccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grado_Has_Seccion_Seccion" Association="SistemaIntranetModel.FK_Grado_Has_Seccion_Seccion">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="Grado_Has_Seccion" EntitySet="Grado_Has_Seccion" />
+          </AssociationSet>
+          <EntitySet Name="Matricula" EntityType="SistemaIntranetModel.Matricula" />
+          <AssociationSet Name="FK_Matricula_Grado_Has_Seccion" Association="SistemaIntranetModel.FK_Matricula_Grado_Has_Seccion">
+            <End Role="Grado_Has_Seccion" EntitySet="Grado_Has_Seccion" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Usuario" Association="SistemaIntranetModel.FK_Matricula_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluacion_Grado_Has_Seccion" Association="SistemaIntranetModel.FK_Evaluacion_Grado_Has_Seccion">
+            <End Role="Grado_Has_Seccion" EntitySet="Grado_Has_Seccion" />
+            <End Role="Evaluacion" EntitySet="Evaluacion" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="usp_user_acceso_Result">
           <Property Type="Int32" Name="idacceso" Nullable="false" />
@@ -668,6 +795,7 @@
           <Property Name="idusuario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Relacion" Relationship="SistemaIntranetModel.FK_Apoderado_Relacion" FromRole="Apoderado" ToRole="Relacion" />
           <NavigationProperty Name="Usuario" Relationship="SistemaIntranetModel.FK_Apoderado_Usuario" FromRole="Apoderado" ToRole="Usuario" />
+          <Property Name="emailApoderado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Calificacion">
           <Key>
@@ -723,6 +851,8 @@
           <NavigationProperty Name="Calificacion" Relationship="SistemaIntranetModel.FK_Calificacion_Evaluacion" FromRole="Evaluacion" ToRole="Calificacion" />
           <NavigationProperty Name="Curso" Relationship="SistemaIntranetModel.FK_Evaluacion_Curso" FromRole="Evaluacion" ToRole="Curso" />
           <NavigationProperty Name="TipoEvaluacion" Relationship="SistemaIntranetModel.FK_Evaluacion_TipoEvaluacion" FromRole="Evaluacion" ToRole="TipoEvaluacion" />
+          <Property Name="idgrado_seccion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grado_Has_Seccion" Relationship="SistemaIntranetModel.FK_Evaluacion_Grado_Has_Seccion" FromRole="Evaluacion" ToRole="Grado_Has_Seccion" />
         </EntityType>
         <EntityType Name="Grado">
           <Key>
@@ -731,6 +861,7 @@
           <Property Name="idgrado" Type="Int32" Nullable="false" />
           <Property Name="nombreGrado" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Horario" Relationship="SistemaIntranetModel.FK_Horario_Grado" FromRole="Grado" ToRole="Horario" />
+          <NavigationProperty Name="Grado_Has_Seccion" Relationship="SistemaIntranetModel.FK_Grado_Has_Seccion_Grado" FromRole="Grado" ToRole="Grado_Has_Seccion" />
         </EntityType>
         <EntityType Name="Horario">
           <Key>
@@ -762,6 +893,7 @@
           <Property Name="idseccion" Type="Int32" Nullable="false" />
           <Property Name="nombreSeccion" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Horario" Relationship="SistemaIntranetModel.FK_Horario_Seccion" FromRole="Seccion" ToRole="Horario" />
+          <NavigationProperty Name="Grado_Has_Seccion" Relationship="SistemaIntranetModel.FK_Grado_Has_Seccion_Seccion" FromRole="Seccion" ToRole="Grado_Has_Seccion" />
         </EntityType>
         <EntityType Name="TipoEvaluacion">
           <Key>
@@ -914,6 +1046,90 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Grado_Has_Seccion">
+          <Key>
+            <PropertyRef Name="idgrado_seccion" />
+          </Key>
+          <Property Name="idgrado_seccion" Type="Int32" Nullable="false" />
+          <Property Name="idgrado" Type="Int32" Nullable="false" />
+          <Property Name="idseccion" Type="Int32" Nullable="false" />
+          <Property Name="vacante_total" Type="Int32" />
+          <Property Name="vacante_disponible" Type="Int32" />
+          <NavigationProperty Name="Grado" Relationship="SistemaIntranetModel.FK_Grado_Has_Seccion_Grado" FromRole="Grado_Has_Seccion" ToRole="Grado" />
+          <NavigationProperty Name="Seccion" Relationship="SistemaIntranetModel.FK_Grado_Has_Seccion_Seccion" FromRole="Grado_Has_Seccion" ToRole="Seccion" />
+          <NavigationProperty Name="Matricula" Relationship="SistemaIntranetModel.FK_Matricula_Grado_Has_Seccion" FromRole="Grado_Has_Seccion" ToRole="Matricula" />
+          <NavigationProperty Name="Evaluacion" Relationship="SistemaIntranetModel.FK_Evaluacion_Grado_Has_Seccion" FromRole="Grado_Has_Seccion" ToRole="Evaluacion" />
+        </EntityType>
+        <Association Name="FK_Grado_Has_Seccion_Grado">
+          <End Type="SistemaIntranetModel.Grado" Role="Grado" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Grado_Has_Seccion" Role="Grado_Has_Seccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado">
+              <PropertyRef Name="idgrado" />
+            </Principal>
+            <Dependent Role="Grado_Has_Seccion">
+              <PropertyRef Name="idgrado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grado_Has_Seccion_Seccion">
+          <End Type="SistemaIntranetModel.Seccion" Role="Seccion" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Grado_Has_Seccion" Role="Grado_Has_Seccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="idseccion" />
+            </Principal>
+            <Dependent Role="Grado_Has_Seccion">
+              <PropertyRef Name="idseccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Matricula">
+          <Key>
+            <PropertyRef Name="idmatricula" />
+          </Key>
+          <Property Name="idmatricula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idgrado_seccion" Type="Int32" Nullable="false" />
+          <Property Name="idusuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grado_Has_Seccion" Relationship="SistemaIntranetModel.FK_Matricula_Grado_Has_Seccion" FromRole="Matricula" ToRole="Grado_Has_Seccion" />
+          <NavigationProperty Name="Usuario" Relationship="SistemaIntranetModel.FK_Matricula_Usuario" FromRole="Matricula" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Matricula_Grado_Has_Seccion">
+          <End Type="SistemaIntranetModel.Grado_Has_Seccion" Role="Grado_Has_Seccion" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Matricula" Role="Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado_Has_Seccion">
+              <PropertyRef Name="idgrado_seccion" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="idgrado_seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Usuario">
+          <End Type="SistemaIntranetModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Matricula" Role="Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evaluacion_Grado_Has_Seccion">
+          <End Type="SistemaIntranetModel.Grado_Has_Seccion" Role="Grado_Has_Seccion" Multiplicity="1" />
+          <End Type="SistemaIntranetModel.Evaluacion" Role="Evaluacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grado_Has_Seccion">
+              <PropertyRef Name="idgrado_seccion" />
+            </Principal>
+            <Dependent Role="Evaluacion">
+              <PropertyRef Name="idgrado_seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -962,6 +1178,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="SistemaIntranetModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="emailUsuario" ColumnName="emailUsuario" />
                 <ScalarProperty Name="rutaImagen" ColumnName="rutaImagen" />
                 <ScalarProperty Name="idusuario" ColumnName="idusuario" />
@@ -992,6 +1209,7 @@
           <EntitySetMapping Name="Apoderado">
             <EntityTypeMapping TypeName="SistemaIntranetModel.Apoderado">
               <MappingFragment StoreEntitySet="Apoderado">
+                <ScalarProperty Name="emailApoderado" ColumnName="emailApoderado" />
                 <ScalarProperty Name="idusuario" ColumnName="idusuario" />
                 <ScalarProperty Name="idrelacion" ColumnName="idrelacion" />
                 <ScalarProperty Name="telefonoApoderado" ColumnName="telefonoApoderado" />
@@ -1039,6 +1257,7 @@
           <EntitySetMapping Name="Evaluacion">
             <EntityTypeMapping TypeName="SistemaIntranetModel.Evaluacion">
               <MappingFragment StoreEntitySet="Evaluacion">
+                <ScalarProperty Name="idgrado_seccion" ColumnName="idgrado_seccion" />
                 <ScalarProperty Name="idtipo" ColumnName="idtipo" />
                 <ScalarProperty Name="idcurso" ColumnName="idcurso" />
                 <ScalarProperty Name="estadoEvaluacion" ColumnName="estadoEvaluacion" />
@@ -1122,6 +1341,26 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SistemaIntranetModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SistemaIntranetModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Grado_Has_Seccion">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Grado_Has_Seccion">
+              <MappingFragment StoreEntitySet="Grado_Has_Seccion">
+                <ScalarProperty Name="vacante_disponible" ColumnName="vacante_disponible" />
+                <ScalarProperty Name="vacante_total" ColumnName="vacante_total" />
+                <ScalarProperty Name="idseccion" ColumnName="idseccion" />
+                <ScalarProperty Name="idgrado" ColumnName="idgrado" />
+                <ScalarProperty Name="idgrado_seccion" ColumnName="idgrado_seccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matricula">
+            <EntityTypeMapping TypeName="SistemaIntranetModel.Matricula">
+              <MappingFragment StoreEntitySet="Matricula">
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="idgrado_seccion" ColumnName="idgrado_seccion" />
+                <ScalarProperty Name="idmatricula" ColumnName="idmatricula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

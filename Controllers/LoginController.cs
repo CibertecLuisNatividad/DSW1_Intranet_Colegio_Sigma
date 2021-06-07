@@ -28,7 +28,7 @@ namespace Proyecto_SistemaIntranet.Controllers
           
                     //Buscamos al Usuario segun el username y password ingresado.
                     var obj_user = (from d in db.Usuario
-                                    where d.username == username.Trim() && d.password == password.Trim()
+                                    where d.username == username.Trim() && d.password == password.Trim() && d.estado == "Activo"
                                     select d).FirstOrDefault();
                     if(obj_user == null)
                     {
@@ -88,7 +88,7 @@ namespace Proyecto_SistemaIntranet.Controllers
             smtp.Port = 587;
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.UseDefaultCredentials = false;
-            NetworkCredential credential = new NetworkCredential("i201824463@cibertec.edu.pe", "04Natlu97");
+            NetworkCredential credential = new NetworkCredential("i201824463@cibertec.edu.pe", "00000");
             smtp.EnableSsl = true;
             smtp.Credentials = credential;
           

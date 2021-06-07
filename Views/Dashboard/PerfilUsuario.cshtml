@@ -7,7 +7,12 @@
     Usuario obj = (Usuario)Session["Usuario"];
     Apoderado ap = (Apoderado)Session["Apoderado"];
 }
+@section css{
 
+    @*<link href="assets\plugins\jvectormap-next\jquery-jvectormap.css" rel="stylesheet">*@
+        <link href="~/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet">
+
+}
 <!-- begin #content -->
 <div id="content" class="content">
     <!-- begin breadcrumb -->
@@ -133,7 +138,7 @@
                                         <input type="text" class="form-control" id="idApellido" disabled value="@obj.telefonoUsuario" name="apellido">
                                     </div>
                                 </div>
-                             
+
                             </div>
                         </div>
                     </form>
@@ -142,7 +147,7 @@
 
             </div>
             <!-- end panel -->
-          
+
         </div>
         <!-- end col-6 -->
 
@@ -153,16 +158,26 @@
 </div>
 <!-- end #content -->
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        setTimeout(function () {
-            $("#alerta").alert('close');
-        }, 3000);
-    });
-</script>
-<script src="assets\plugins\jquery-sparkline\jquery.sparkline.min.js"></script>
-<script src="assets\plugins\bootstrap-datepicker\dist\js\bootstrap-datepicker.js"></script>
-<script src="assets\plugins\bootstrap-timepicker\js\bootstrap-timepicker.min.js"></script>
-<script src="assets\plugins\bootstrap-show-password\dist\bootstrap-show-password.js"></script>
-<script src="assets\js\demo\form-plugins.demo.js"></script>
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#alerta").alert('close');
+            }, 3000);
+        });
+    </script>
+
+
+    @*<script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>*@
+    <script src="~/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="~/assets/plugins/bootstrap-show-password/dist/bootstrap-show-password.js"></script>
+    <script src="~/assets/js/demo/form-plugins.demo.js"></script>
+
+
+}
+
+
+
 

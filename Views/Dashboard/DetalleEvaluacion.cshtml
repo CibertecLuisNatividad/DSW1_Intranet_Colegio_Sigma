@@ -1,0 +1,185 @@
+﻿@using Proyecto_SistemaIntranet.Models
+@{
+    ViewBag.Title = "DetalleEvaluacion";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+
+    Evaluacion ev = ViewBag.Evaluacion;
+}
+
+<!-- begin #content Contenido Principal-->
+<div id="content" class="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb float-xl-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Inicio</a></li>
+        <li class="breadcrumb-item active">Detalle Evaluación</li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <h1 class="page-header">Detalle de Evaluación Académica<small></small></h1>
+    <!-- end page-header -->
+    <!-- begin row -->
+    <div class="row row-space-10 m-b-20">
+        <!-- begin col-3 -->
+        <div class="col-lg-3 col-sm-6">
+            <div class="widget widget-stats bg-gradient-teal m-b-10">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Curso:</div>
+                    <div class="stats-number">@ev.Curso.nombreCurso</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 100%;"></div>
+                    </div>
+                    @*<div class="stats-desc">Better than last week (70.1%)</div>*@
+                </div>
+            </div>
+        </div>
+        <!-- end col-3 -->
+        <!-- begin col-3 -->
+        <div class="col-lg-3 col-sm-6">
+            <div class="widget widget-stats bg-gradient-blue m-b-10">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Tipo de Evaluación:</div>
+                    <div class="stats-number">@ev.TipoEvaluacion.nombreTipo</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-3 -->
+        <!-- begin col-3 -->
+        <div class="col-lg-3 col-sm-6">
+            <div class="widget widget-stats bg-gradient-purple m-b-10">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Fecha Inicio:</div>
+                    <div class="stats-number">@ev.fechaInicio.ToShortDateString() @ev.horaInicio:00</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-3 -->
+        <!-- begin col-3 -->
+        <div class="col-lg-3 col-sm-6">
+            <div class="widget widget-stats bg-gradient-orange m-b-10">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">Fecha Fin: </div>
+                    <div class="stats-number">@ev.fechaFin.ToShortDateString() @ev.horaFin:00</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-3 -->
+
+
+    </div>
+    <!-- end row -->
+
+    <div class="row row-space-10 text-center">
+        <div class="form-group col-8 offset-md-2">
+            <label class="f-w-800 f-s-33"><b>Descripción</b></label>
+            <textarea class="form-control f-s-15 f-w-600" style="resize:none" rows="7" cols="90" readonly>@ev.observacionEvaluacion</textarea>
+        </div>
+        <div class="form-group col-8 offset-md-2">
+            <a href="@ev.rutaEvaluacion" class="btn btn-lg btn-success" target="_blank">
+                <span class="d-flex align-items-center text-left">
+                    <i class="fa fa-file fa-3x mr-3"></i>
+                    <span>
+                        <span class="d-block mb-n1 f-s-20"><b>Descargar Archivo</b></span>
+
+                    </span>
+                </span>
+            </a>
+        </div>
+        <div class="form-group col-8 offset-md-2">
+            <a href="#modal-upload" class="btn btn-lg btn-primary" data-toggle="modal" id="idUpload">
+                <span class="d-flex align-items-center text-left">
+                    <i class="fa fa-cloud-upload-alt fa-3x mr-3 "></i>
+                    <span>
+                        <span class="d-block mb-n1 f-s-20"><b>Subir Evaluación</b></span>
+
+                    </span>
+                </span>
+            </a>
+        </div>
+    </div>
+
+
+    <!-- begin #modal-dialog SUBIR ARCHIVO-->
+    <div class="modal fade " id="modal-upload">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-blue-darker">
+                    <h4 class="modal-title text-white">SUBIR EVALUACIÓN</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <form action="ServletAplicacion?accion=REGISTRARDETALLE" method="POST" id="formRegistrarApp">
+                        <div class="container">
+
+                            <div class="row">
+                                <div class="col-md-4 p-r-10">
+                                    <img src="https://img.icons8.com/cute-clipart/512/000000/file.png" width="300px" height="300px" />
+
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+
+                                        <input type="hidden" class="form-control" id="exampleInputEmail1" placeholder="">
+                                    </div>
+                                    <div class="form-group p-l-40 p-t-20 p-r-20">
+                                        <label for="exampleInputEmail1"><b>Sube el Archivo</b></label>
+                                        <input type="hidden" id="urlAPP" name="urlAPP">
+                                        <div class="custom-file m-b-15">
+                                            <input type="file" class="custom-file-input-app" id="Filecustom">
+                                            <label class="custom-file-label" for="Filecustom">Selecciona un Archivo</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group p-l-40 p-t-20 p-r-20">
+                                        <label><b>Comentario</b></label>
+                                        <textarea class="form-control" style="resize:none" rows="5"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 text-center m-t-40">
+                                    <button type="submit" id="subirArchivo" class="btn btn-lg btn-blue m-r-20 f-s-20">Enviar</button>
+                                    <button type="button" id="cancelarArchivo" class="btn btn-lg btn-muted f-s-20" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end #modal-dialog SUBIR ARCHIVO-->
+
+
+
+
+
+    <a href="@Url.Action( "EvaluacionAlumno", "Dashboard")" class="btn btn-cyan btn-lg">VOLVER</a>
+</div>
+<!-- end #content Contenido Principal-->
+
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        document.querySelector('.custom-file-input-app').addEventListener('change', function (e) {
+            var fileName = document.getElementById("Filecustom").files[0].name;
+            var nextSibling = e.target.nextElementSibling;
+            nextSibling.innerText = fileName;
+        });
+    </script>
+
+}

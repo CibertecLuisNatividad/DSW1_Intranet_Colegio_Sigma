@@ -18,6 +18,7 @@ namespace Proyecto_SistemaIntranet.Models
         public Seccion()
         {
             this.Horario = new HashSet<Horario>();
+            this.Grado_Has_Seccion = new HashSet<Grado_Has_Seccion>();
         }
     
         public int idseccion { get; set; }
@@ -25,5 +26,7 @@ namespace Proyecto_SistemaIntranet.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Horario> Horario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Grado_Has_Seccion> Grado_Has_Seccion { get; set; }
     }
 }

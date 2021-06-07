@@ -12,20 +12,13 @@ namespace Proyecto_SistemaIntranet.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Apoderado
+    public partial class Matricula
     {
-        public int idapoderado { get; set; }
-        public string nombreApoderado { get; set; }
-        public string apellidoApoderado { get; set; }
-        public string dniApoderado { get; set; }
-        public string direccionApoderado { get; set; }
-        public string profesionApoderado { get; set; }
-        public string telefonoApoderado { get; set; }
-        public int idrelacion { get; set; }
+        public int idmatricula { get; set; }
+        public int idgrado_seccion { get; set; }
         public int idusuario { get; set; }
-        public string emailApoderado { get; set; }
     
-        public virtual Relacion Relacion { get; set; }
+        public virtual Grado_Has_Seccion Grado_Has_Seccion { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

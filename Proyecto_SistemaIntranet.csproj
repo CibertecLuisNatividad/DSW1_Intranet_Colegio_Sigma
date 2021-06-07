@@ -158,7 +158,13 @@
     <Compile Include="Models\Grado.cs">
       <DependentUpon>ModeloIntranet.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Grado_Has_Seccion.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Horario.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Matricula.cs">
       <DependentUpon>ModeloIntranet.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Menu.cs" />
@@ -260,8 +266,14 @@
     <Content Include="assets\css\webfonts\fa-brands-400.svg" />
     <Content Include="assets\css\webfonts\fa-regular-400.svg" />
     <Content Include="assets\css\webfonts\fa-solid-900.svg" />
+    <Content Include="assets\img\gallery\estudio.jpg" />
+    <Content Include="assets\img\gallery\estudio2.jpg" />
+    <Content Include="assets\img\gallery\estudio3.jpg" />
+    <Content Include="assets\img\gallery\estudio4.jpg" />
     <Content Include="assets\img\gallery\gallery-7-thumb.jpeg" />
     <Content Include="assets\img\gallery\gallery-7.jpeg" />
+    <Content Include="assets\img\gallery\publicidad3.jpg" />
+    <Content Include="assets\img\gallery\sigma.png" />
     <Content Include="assets\img\login-bg\callao.jpg" />
     <Content Include="assets\img\login-bg\colegioprivado1.jpg" />
     <Content Include="assets\img\login-bg\colegioprivado2.jpg" />
@@ -279,6 +291,7 @@
     <Content Include="assets\js\demo\dashboard.js" />
     <Content Include="assets\js\demo\form-plugins.demo.js" />
     <Content Include="assets\js\demo\form-summernote.demo.js" />
+    <Content Include="assets\js\demo\form-wizards.demo.js" />
     <Content Include="assets\js\demo\render.highlight.js" />
     <Content Include="assets\js\demo\table-manage-buttons.demo.js" />
     <Content Include="assets\js\demo\table-manage-default.demo.js" />
@@ -469,6 +482,16 @@
     <Content Include="assets\plugins\pdfmake\build\pdfmake.js" />
     <Content Include="assets\plugins\pdfmake\build\pdfmake.min.js" />
     <Content Include="assets\plugins\pdfmake\build\vfs_fonts.js" />
+    <Content Include="assets\plugins\smartwizard\dist\css\smart_wizard.css" />
+    <Content Include="assets\plugins\smartwizard\dist\css\smart_wizard.min.css" />
+    <Content Include="assets\plugins\smartwizard\dist\css\smart_wizard_theme_arrows.css" />
+    <Content Include="assets\plugins\smartwizard\dist\css\smart_wizard_theme_arrows.min.css" />
+    <Content Include="assets\plugins\smartwizard\dist\css\smart_wizard_theme_circles.css" />
+    <Content Include="assets\plugins\smartwizard\dist\css\smart_wizard_theme_circles.min.css" />
+    <Content Include="assets\plugins\smartwizard\dist\css\smart_wizard_theme_dots.css" />
+    <Content Include="assets\plugins\smartwizard\dist\css\smart_wizard_theme_dots.min.css" />
+    <Content Include="assets\plugins\smartwizard\dist\js\jquery.smartWizard.js" />
+    <Content Include="assets\plugins\smartwizard\dist\js\jquery.smartWizard.min.js" />
     <Content Include="assets\plugins\summernote\dist\font\index-1.html" />
     <Content Include="assets\plugins\summernote\dist\font\index-2.html" />
     <Content Include="assets\plugins\summernote\dist\font\index-3.html" />
@@ -574,7 +597,11 @@
     <Content Include="Views\Dashboard\Horario.cshtml" />
     <Content Include="Views\Login\RecuperaPassword.cshtml" />
     <Content Include="Views\Dashboard\AcercaDe.cshtml" />
-    <Content Include="Views\Dashboard\Evaluacion.cshtml" />
+    <Content Include="Views\Dashboard\GestionarUsuarios.cshtml" />
+    <Content Include="Views\Dashboard\Matricula.cshtml" />
+    <Content Include="Views\Dashboard\EvaluacionAlumno.cshtml" />
+    <Content Include="Views\Dashboard\DetalleEvaluacion.cshtml" />
+    <Content Include="Views\Dashboard\ConsultaDocente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,8 +1,15 @@
-﻿
+﻿@using Proyecto_SistemaIntranet.Models
 
 @{
     ViewBag.Title = "Principal";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    Usuario obj = (Usuario)Session["Usuario"];
+}
+
+@section css{
+    <link href="~/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+
 }
 
 <!-- begin #content Contenido Principal-->
@@ -16,5 +23,126 @@
     <!-- begin page-header -->
     <h1 class="page-header">Colegio "Sigma" <small>Bienvenido(a) a la página principal</small></h1>
     <!-- end page-header -->
+    <div class="row row-space-10">
+        <div class="col-md-8">
+            <!-- begin widget-card -->
+            <div class="widget-card widget-card-rounded m-b-20" data-id="widget">
+                <div class="widget-card-cover" style="background-image: url(../assets/img/gallery/estudio4.jpg);background-size: cover;background-repeat: no-repeat;"></div>
+                <div class="widget-card-content text-center ">
+                    <b class="text-white f-s-25">BIENVENIDO AL CICLO 2021-I</b>
+                </div>
+                <div class="row widget-card-content ">
+                    <div class="col-12 text-center">
+                        <img src="~/assets/img/gallery/sigma.png" style="background-color:cornflowerblue;border-radius:20px;" alt="Alternate Text" width="300px;" />
+                    </div>
+                    <div class="col-12 text-center f-w-800">
+                        <br /><br />
+                        <p class="f-s-25 text-white">"La Educación es el Arma mas Poderosa que puedes usar para cambiar el mundo"</p>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- end widget-card -->
+        </div>
+        <div class="col-md-4">
+            <!-- begin widget-card -->
+            <div class="widget-card widget-card-rounded m-b-20" data-id="widget">
+                <div class="widget-card-cover" style="background-image: url(../assets/img/gallery/publicidad3.jpg);height:310px;"></div>
+                <div class="widget-card-content text-center ">
+
+                </div>
+                <div class="row widget-card-content ">
+
+
+                </div>
+            </div>
+            <!-- end widget-card -->
+        </div>
+        <div class="col-md-12">
+            <!-- Inicio Anuncios -->
+            <!-- begin panel -->
+            <div class="panel panel-inverse" data-sortable-id="index-5">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Anuncios</h4>
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="height-sm" data-scrollbar="true">
+                        <ul class="media-list media-list-with-divider media-messaging">
+                            <li class="media media-sm">
+                                <a href="javascript:;" class="pull-left">
+                                    <img src="https://img.icons8.com/cute-clipart/256/000000/commercial.png" alt="" class="media-object rounded-corner">
+                                </a>
+                                <div class="media-body">
+                                    <h5 class="media-heading">Comunicado: Curso - Álgebra</h5>
+                                    <p>Estimados Alumnos, el día Miercoles 09/06/2021 se desarrollará la primera práctica Calificada del Curso de Algebra. Estudien y mucha suerte en el examen</p>
+                                </div>
+                            </li>
+                            <li class="media media-sm">
+                                <a href="javascript:;" class="pull-left">
+                                    <img src="https://img.icons8.com/cute-clipart/256/000000/commercial.png" alt="" class="media-object rounded-corner">
+                                </a>
+                                <div class="media-body">
+                                    <h5 class="media-heading">Comunicado: La Administración</h5>
+                                    <p>Estimados Alumnos, el día 09/06/2021 no habrá clases por motivo de aniversario del Colegio. Pasen un buen fin de semana a lado de sus familiares</p>
+                                </div>
+                            </li>
+                            <li class="media media-sm">
+                                <a href="javascript:;" class="pull-left">
+                                    <img src="https://img.icons8.com/cute-clipart/256/000000/commercial.png" alt="" class="media-object rounded-corner">
+                                </a>
+                                <div class="media-body">
+                                    <h5 class="media-heading">Comunicado: Curso - Lenguaje</h5>
+                                    <p>Estimados alumnos, para comunicar que el día 05/06/2021 se desarrollará el control de texto de Quijote de la Mancha. Procuren leer el capitulo II</p>
+                                </div>
+                            </li>
+                            <li class="media media-sm">
+                                <a href="javascript:;" class="pull-left">
+                                    <img src="https://img.icons8.com/cute-clipart/256/000000/commercial.png" alt="" class="media-object rounded-corner">
+                                </a>
+                                <div class="media-body">
+                                    <h5 class="media-heading">Comunicado: Curso - Economía</h5>
+                                    <p>Estimados Alumnos, por motivo de salud el día de mañana 04/04/2021 no habrá clases. Se coordinará recuperación.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    @if (obj.idrol!=2)
+                    {
+                        <form>
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light" placeholder="Ingrese Mensaje">
+                                <span class="input-group-append">
+                                    <button class="btn btn-primary" type="button"><i class="fa fa-pencil-alt"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    }
+
+                </div>
+            </div>
+            <!-- end panel -->
+            <!-- Fin anuncios -->
+        </div>
+
+    </div>
+
+
 </div>
 <!-- end #content Contenido Principal-->
+@section scripts{
+    <script src="~/assets/plugins/gritter/js/jquery.gritter.js"></script>
+    <script src="~/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/js/demo/dashboard.js"></script>
+
+
+}
