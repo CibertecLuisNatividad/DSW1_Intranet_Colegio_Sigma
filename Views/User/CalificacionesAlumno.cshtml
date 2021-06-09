@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Proyecto_SistemaIntranet.Models.Usuario>
+
+@{
+    ViewBag.Title = "Mis Calificaciones";
+}
+
+<h2 class="text-primary text-center">Mis Calificaciones</h2>
+
+<div class="container">
+    @using (Html.BeginForm()) { 
+        <div class="form-inline d-flex justify-content-around">
+            <div class="form-group">
+                <label>Cursos: </label>
+                <select class="form-control">
+                    <option>Seleccione un curso</option>
+                    <option>Matematica</option>
+                    <option>Historia</option>
+                    <option>Lenguaje</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Estado: </label>
+                <select class="form-control">
+                    <option>Seleccione un Estado</option>
+                    <option>Calificado</option>
+                    <option>Pendiente</option>
+                </select>
+                <input type="submit" class="btn btn-primary" value="Buscar" />
+            </div>
+        </div>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Evaluacion</th>
+                <th>Curso</th>
+                <th>Estado</th>
+                <th>Nota</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <!-- Datos Estaticos por el momento -->
+        <tbody>
+        </tbody>
+    </table>
+</div>

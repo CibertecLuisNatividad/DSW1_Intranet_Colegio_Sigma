@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Proyecto_SistemaIntranet.Models.Usuario>
+
+@{
+    ViewBag.Title = "Mi Matricula de Cursos";
+}
+
+<h2 class="text-primary text-center my-3">Mis Cursos Matriculados</h2>
+
+<!-- Se Filtraran-->
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <div class="form-inline d-flex justify-content-center">
+            <div class="form-group">
+                <label>Periodo Academico: </label>
+                <input class="form-control" type="text" maxlength="4" value="@DateTime.Now.Year" />
+                <input type="submit" class="btn btn-primary" value="Filtrar"/>
+            </div>
+        </div>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Curso</th>
+                <th>Docente</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Datos Estaticos por el momento -->
+            <tr>
+                <td>Algebra</td>
+                <td>Juan Torres Jimenez</td>
+                <td>En Curso</td>
+            </tr>
+            <tr>
+                <td>Aritmetica</td>
+                <td>Jorge Santos Morales</td>
+                <td>En Curso</td>
+            </tr>
+            <tr>
+                <td>Raz. Matematico</td>
+                <td>Luis Sarmiento Alvarado</td>
+                <td>En Curso</td>
+            </tr>
+            <tr>
+                <td>Algebra</td>
+                <td>Juan Torres Jimenez</td>
+                <td>En Curso</td>
+            </tr>
+            <tr>
+                <td>Trigonometria</td>
+                <td>Pedro Morales Marez</td>
+                <td>En Curso</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
