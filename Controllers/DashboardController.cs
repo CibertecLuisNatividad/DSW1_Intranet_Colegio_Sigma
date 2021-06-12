@@ -121,5 +121,11 @@ namespace Proyecto_SistemaIntranet.Controllers
 
             return View();
         }
+
+        public ActionResult ConsultaDocente()
+        {
+            return View();
+        }
+
     }
 }

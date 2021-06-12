@@ -1,0 +1,57 @@
+﻿@using Proyecto_SistemaIntranet.Models
+@{
+    ViewBag.Title = "ConsultaDocente";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    Usuario obj = (Usuario)Session["Usuario"];
+}
+
+<h2>Consulta Docente</h2>
+<div class="panel panel-inverse" data-sortable-id="table-basic-7">
+    <div class="panel-heading">
+        <h4 class="panel-title">UI Elements in Table <span class="label label-success m-l-5 t-minus-1">NEW</span></h4>
+        <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>   
+        </div>
+    </div>
+    <div class="panel-body"> 
+        <div class="table-responsive">
+            <table class="table table-striped m-b-0">
+                <thead>
+                    <tr>
+                        <th>Alumno</th>
+                        <th>Comentario</th>
+                        <th width="1%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pedro Casas</td>
+                        <td>¿Profesor mañana hay clases?<td>
+                        <td class="with-btn" nowrap="">
+                            <a href="#" class="btn btn-sm btn-primary width-100 m-r-2">Responder</a>  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Juan Olivera</td>
+                        <td>¿Cuando es el examen?</td>
+                        <td class="with-btn-group" nowrap="">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-sm btn-primary width-100 m-r-2">Responder</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nadine Perez</td>
+                        <td>Porfesor acabo de subir el trabajo.</td>
+                        <td class="with-btn" nowrap="">
+                            <a href="#" class="btn btn-sm btn-primary width-100 m-r-2">Responder</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

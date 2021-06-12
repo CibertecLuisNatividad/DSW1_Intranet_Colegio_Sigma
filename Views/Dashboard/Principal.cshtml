@@ -1,13 +1,18 @@
-﻿
+﻿2w
 
 @{
     ViewBag.Title = "Principal";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    <link rel="stylesheet" href="~/assets/css/reloj.css" />
+
+
 }
 
 <!-- begin #content Contenido Principal-->
+
 <div id="content" class="content">
     <!-- begin breadcrumb -->
+
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="javascript:;">Inicio</a></li>
         <li class="breadcrumb-item active">Página Principal</li>
@@ -16,5 +21,102 @@
     <!-- begin page-header -->
     <h1 class="page-header">Colegio "Sigma" <small>Bienvenido(a) a la página principal</small></h1>
     <!-- end page-header -->
+
+
+    <div class="panel panel-primary" data-sortable-id="ui-typography-8">
+        <div class="panel-heading">
+            <h5 class="panel-title">Bienvenido al ciclo 2021</h5>
+
+        </div>
+        <div class="panel-body">
+            <p>
+                "La Educación es el arma más poderosa que puedes usar para cambiar el mundo"
+            </p>
+
+        </div>
+
+    </div>
+    <!-- inicio reloj -->
+    <div class="wrap ">
+        <div class="widget">
+            <div class="fecha">
+                <p id="diaSemana" class="diaSemana"></p>
+                <p id="dia" class="dia"></p>
+                <p>de</p>
+                <p id="mes" class="mes"></p>
+                <p>del</p>
+                <p id="year" class="year"></p>
+            </div>
+            <div class="reloj">
+                <p id="horas" class="horas"></p>
+                <p>:</p>
+                <p id="minutos" class="minutos"></p>
+                <p>:</p>
+                <div class="cajaSegundos">
+                    <p id="ampm" class="ampm"></p>
+                    <p id="segundos" class="segundos"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- reloj final -->
+    <!-- Inicio Anuncios -->
+    <div class="panel panel-inverse" data-sortable-id="index-5">
+        <div class="panel-heading">
+            <h4 class="panel-title">Anuncios</h4>
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="height-sm" data-scrollbar="true">
+                <ul class="media-list media-list-with-divider media-messaging">
+                    <li class="media media-sm">
+
+                        <div class="media-body">
+                            <h5 class="media-heading">Matematica</h5>
+                            <p>Examen para el dia 26 de mayo</p>
+                        </div>
+                    </li>
+                    <li class="media media-sm">
+
+                        <div class="media-body">
+                            <h5 class="media-heading">Comunicacion</h5>
+                            <p>Para el dia de mañana se entrega la evaluacion</p>
+                        </div>
+                    </li>
+                    <li class="media media-sm">
+
+                        <div class="media-body">
+                            <h5 class="media-heading">CTA</h5>
+                            <p>El dia de hoy no tendremos clases, por motivos de fuerza mayor. Gracias por su comprension</p>
+                        </div>
+                    </li>
+                    <li class="media media-sm">
+
+                        <div class="media-body">
+                            <h5 class="media-heading">Historia</h5>
+                            <p>El dia de mañana estara habilidtada la opcion de </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <form>
+                <div class="input-group">
+                    <input type="text" class="form-control bg-light" placeholder="Enter message">
+                    <span class="input-group-append">
+                        <button class="btn btn-primary" type="button"><i class="fa fa-pencil-alt"></i></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Fin anuncios -->
 </div>
 <!-- end #content Contenido Principal-->
