@@ -562,6 +562,8 @@
     <Content Include="Views\Dashboard\Principal.cshtml" />
     <Content Include="Views\Error\UnauthorizedOperation.cshtml" />
     <Content Include="Views\User\ListaHorarioAlumno.cshtml" />
+    <Content Include="Views\User\CursosxMatricula.cshtml" />
+    <Content Include="Views\User\CalificacionesAlumno.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
