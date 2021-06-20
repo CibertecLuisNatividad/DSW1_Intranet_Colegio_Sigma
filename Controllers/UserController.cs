@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyecto_SistemaIntranet.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,8 @@ namespace Proyecto_SistemaIntranet.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User
-
+        SistemaIntranetEntities bd = new SistemaIntranetEntities();
+        Usuario usuario;
         /*
          * En esta vista se mostraran la lista de horarios de los alumnos segun su grado
          * Aclaraciones: Todos los usuarios del mismo grado tienen el mismo horario de clases
@@ -29,10 +30,24 @@ namespace Proyecto_SistemaIntranet.Controllers
 
         /*
          * Se visualizan las calificaciones de los alumnos
-         * segun su curso y estado
+         * segun su curso
          */
-        public ActionResult CalificacionesAlumno()
+        public ActionResult CalificacionesAlumno(int? idcurso)
         {
+            usuario = (Usuario)Session["Usuario"];
+
+            if(usuario != null)
+            {
+                ViewBag.cursos = new SelectList(bd.Curso.ToList(),"idcurso","nombreCurso", idcurso);
+
+                var calificacion = from ca
+                                   in bd.Calificacion
+                                   where ca.idusuario == usuario.idusuario && ca.Evaluacion.Curso.idcurso == idcurso
+                                   select ca;
+
+                // Listado segun el curso
+                return View(calificacion.ToList());
+            }
             return View();
         }
     }

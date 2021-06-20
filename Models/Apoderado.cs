@@ -18,6 +18,7 @@ namespace Proyecto_SistemaIntranet.Models
         public string nombreApoderado { get; set; }
         public string apellidoApoderado { get; set; }
         public string dniApoderado { get; set; }
+        public string emailApoderado { get; set; }
         public string direccionApoderado { get; set; }
         public string profesionApoderado { get; set; }
         public string telefonoApoderado { get; set; }

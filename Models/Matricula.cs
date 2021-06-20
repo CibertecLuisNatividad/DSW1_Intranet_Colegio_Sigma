@@ -12,12 +12,13 @@ namespace Proyecto_SistemaIntranet.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class Matricula
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int idmatricula { get; set; }
+        public int idgrado_seccion { get; set; }
+        public int idusuario { get; set; }
+    
+        public virtual Grado_Has_Seccion Grado_Has_Seccion { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

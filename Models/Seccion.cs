@@ -17,12 +17,15 @@ namespace Proyecto_SistemaIntranet.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Seccion()
         {
+            this.Grado_Has_Seccion = new HashSet<Grado_Has_Seccion>();
             this.Horario = new HashSet<Horario>();
         }
     
         public int idseccion { get; set; }
         public string nombreSeccion { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Grado_Has_Seccion> Grado_Has_Seccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Horario> Horario { get; set; }
     }

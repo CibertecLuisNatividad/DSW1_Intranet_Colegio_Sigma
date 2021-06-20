@@ -23,8 +23,8 @@ namespace Proyecto_SistemaIntranet.Models
         public int idacceso { get; set; }
         public string nombreAcceso { get; set; }
         public string rutaAcceso { get; set; }
-        public int estadoAcceso { get; set; }
         public string iconoAcceso { get; set; }
+        public int estadoAcceso { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rol_has_Acceso> Rol_has_Acceso { get; set; }

@@ -20,6 +20,7 @@ namespace Proyecto_SistemaIntranet.Models
             this.Apoderado = new HashSet<Apoderado>();
             this.Calificacion = new HashSet<Calificacion>();
             this.Carga_Academica = new HashSet<Carga_Academica>();
+            this.Matricula = new HashSet<Matricula>();
         }
     
         public int idusuario { get; set; }
@@ -34,13 +35,16 @@ namespace Proyecto_SistemaIntranet.Models
         public int idrol { get; set; }
         public string rutaImagen { get; set; }
         public string emailUsuario { get; set; }
+        public string estado { get; set; }
     
-        public virtual Rol Rol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Apoderado> Apoderado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Calificacion> Calificacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carga_Academica> Carga_Academica { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Matricula> Matricula { get; set; }
+        public virtual Rol Rol { get; set; }
     }
 }

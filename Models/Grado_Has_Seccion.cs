@@ -12,21 +12,26 @@ namespace Proyecto_SistemaIntranet.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Grado
+    public partial class Grado_Has_Seccion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Grado()
+        public Grado_Has_Seccion()
         {
-            this.Grado_Has_Seccion = new HashSet<Grado_Has_Seccion>();
-            this.Horario = new HashSet<Horario>();
+            this.Evaluacion = new HashSet<Evaluacion>();
+            this.Matricula = new HashSet<Matricula>();
         }
     
+        public int idgrado_seccion { get; set; }
         public int idgrado { get; set; }
-        public string nombreGrado { get; set; }
+        public int idseccion { get; set; }
+        public Nullable<int> vacante_total { get; set; }
+        public Nullable<int> vacante_disponible { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Grado_Has_Seccion> Grado_Has_Seccion { get; set; }
+        public virtual ICollection<Evaluacion> Evaluacion { get; set; }
+        public virtual Grado Grado { get; set; }
+        public virtual Seccion Seccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Horario> Horario { get; set; }
+        public virtual ICollection<Matricula> Matricula { get; set; }
     }
 }

@@ -156,7 +156,13 @@
     <Compile Include="Models\Grado.cs">
       <DependentUpon>ModeloIntranet.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Grado_Has_Seccion.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Horario.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Matricula.cs">
       <DependentUpon>ModeloIntranet.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Menu.cs" />
@@ -187,13 +193,13 @@
     <Compile Include="Models\Seccion.cs">
       <DependentUpon>ModeloIntranet.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ModeloIntranet.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TipoEvaluacion.cs">
       <DependentUpon>ModeloIntranet.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usp_user_acceso_Result.cs">
+      <DependentUpon>ModeloIntranet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usp_Usuario_Acceso_Result.cs">
       <DependentUpon>ModeloIntranet.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
@@ -483,8 +489,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\ModeloIntranet.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModeloIntranet.Context.cs</LastGenOutput>
       <DependentUpon>ModeloIntranet.edmx</DependentUpon>
+      <LastGenOutput>ModeloIntranet.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ModeloIntranet.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

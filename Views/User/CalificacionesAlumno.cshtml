@@ -1,36 +1,23 @@
-﻿@model IEnumerable<Proyecto_SistemaIntranet.Models.Usuario>
+﻿@model IEnumerable<Proyecto_SistemaIntranet.Models.Calificacion>
 
 @{
     ViewBag.Title = "Mis Calificaciones";
 }
 
-<h2 class="text-primary text-center">Mis Calificaciones</h2>
+<h2 class="text-secondary text-center my-4">Mis Calificaciones</h2>
 
 <div class="container">
     @using (Html.BeginForm()) { 
-        <div class="form-inline d-flex justify-content-around">
+        <div class="form-inline d-flex justify-content-end">
             <div class="form-group">
                 <label>Cursos: </label>
-                <select class="form-control">
-                    <option>Seleccione un curso</option>
-                    <option>Matematica</option>
-                    <option>Historia</option>
-                    <option>Lenguaje</option>
-                </select>
+                @Html.DropDownList("idcurso", (SelectList)ViewBag.cursos, new { @class="form-control mb-2"})
             </div>
-            <div class="form-group">
-                <label>Estado: </label>
-                <select class="form-control">
-                    <option>Seleccione un Estado</option>
-                    <option>Calificado</option>
-                    <option>Pendiente</option>
-                </select>
-                <input type="submit" class="btn btn-primary" value="Buscar" />
-            </div>
+            <input class="btn btn-primary" type="submit" value="Consultar"/>
         </div>
     }
 
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
@@ -38,11 +25,20 @@
                 <th>Curso</th>
                 <th>Estado</th>
                 <th>Nota</th>
-                <th>Accion</th>
+                <th></th>
             </tr>
         </thead>
-        <!-- Datos Estaticos por el momento -->
         <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.idcalificacion</td>
+                    <td>@item.Evaluacion.tituloEvaluacion</td>
+                    <td>@item.Evaluacion.Curso.nombreCurso</td>
+                    <td>@item.estadoCalificacion</td>
+                    <td>@item.notaCalificacion</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
